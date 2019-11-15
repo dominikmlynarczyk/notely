@@ -4,12 +4,13 @@ Aplikacja Notely jest semestralnym projektem zaliczeniowym przedmiotu "Programow
 
 ## Cel projektu
 
-Głównym celem aplikacji jest przygotowanie pełnoprawnego edytora formatu Markdown z jednoczesnym generowaniem widoku dla tego formatu. Aplikacja ma być prostym odpowiednikiem aplikacji typu OneNote / Evernote, początkowo wykorzustująca zasoby lokalne z możliwością rozbudowy do przechowywania notatek w chmurze (np. Azure).
+Głównym celem aplikacji jest przygotowanie pełnoprawnego edytora formatu Markdown z jednoczesnym generowaniem widoku dla tego formatu. Aplikacja ma być prostym odpowiednikiem aplikacji typu OneNote / Evernote, początkowo wykorzystująca zasoby lokalne z możliwością rozbudowy do przechowywania notatek w chmurze (np. Azure).
 
 ## Zespół tworzący projekt
 
 1. [Dominik Młynarczyk](https://github.com/dominikmlynarczyk)
-2. Jakub Antosz
+2. [Jakub Antosz](https://github.com/qhorinn?fbclid=IwAR1e2ONikpnInt_6yjzDDX4z_d2lDQ6AX-i6lHwsSfASIS5zubtnpiO1slg)
+3. [Jakub Święch](https://github.com/CaptainOfPain) 
 
 ## Wstępne założenia projektu
 
