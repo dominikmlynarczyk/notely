@@ -12,19 +12,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Notely.Domain.Users.Policies;
-using Notely.Pages;
+using Notely.Application.Users;
+using Notely.Application.Users.Commands;
+using Notely.Domain.Users.DataStructures;
 using Notely.SharedKernel.Application.Handlers;
 
-namespace Notely
+namespace Notely.Pages
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for RegisterPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class RegisterPage : Page
     {
         private readonly ICommandDispatcher _commandDispatcher;
-        public MainWindow(ICommandDispatcher commandDispatcher)
+        public RegisterPage(ICommandDispatcher commandDispatcher)
         {
             _commandDispatcher = commandDispatcher;
             InitializeComponent();
@@ -32,7 +33,10 @@ namespace Notely
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new RegisterPage(_commandDispatcher));
+            var command = new RegisterUserCommand(UserNameTextBox.Text, FirstNameTextBox.Text, SecondNameTextBox.Text,
+                EmailTextBox.Text, PasswordPasswordBox.Password, ConfirmPasswordPasswordBox.Password);
+
+            _commandDispatcher.Dispatch(command);
         }
     }
 }

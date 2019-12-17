@@ -12,7 +12,7 @@ namespace Notely
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App : System.Windows.Application
     {
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -20,16 +20,18 @@ namespace Notely
 
             builder.RegisterType<MainWindow>().AsSelf();
             builder.RegisterDomainFactories();
+            builder.RegisterDbContext();
+            builder.RegisterCommandHandlers();
+            builder.RegisterRepositories();
+            builder.RegisterServices();
+            builder.RegisterMapper();
 
             var container = builder.Build();
 
-            using (var scope = container.BeginLifetimeScope())
-            {
-                var window = scope.Resolve<MainWindow>();
-                window.Show();
-            }
+            var window = container.Resolve<MainWindow>();
+            window.Show();
         }
     }
-
-    
 }
+
+

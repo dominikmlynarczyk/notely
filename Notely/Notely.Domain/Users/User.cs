@@ -13,23 +13,19 @@ namespace Notely.Domain.Users
         public string Email { get; private set; }
         public string PasswordHash { get; private set; }
 
-        private readonly IPasswordPolicyFactory _passwordPolicyFactory;
-
         private User()
         {
         }
-        public User(AggregateId id, string userName, string firstName, string secondName, string email, IPasswordPolicyFactory passwordPolicyFactory) : base(id)
+        public User(AggregateId id, string userName, string firstName, string secondName, string email) : base(id)
         {
-            _passwordPolicyFactory = passwordPolicyFactory;
             SetUserName(userName);
             SetFirstName(firstName);
             SetSecondName(secondName);
             SetEmail(email);
         }
 
-        public void SetPassword(string password)
+        public void SetPassword(string password, IPasswordPolicy policy)
         {
-            var policy = _passwordPolicyFactory.Create<FourLettersPasswordPolicy>();
             if (policy.IsPasswordValid(password))
             {
                 throw new BusinessLogicException("Password doesn't match requirements.");
@@ -37,6 +33,10 @@ namespace Notely.Domain.Users
 
             PasswordHash = BCrypt.Net.BCrypt.HashPassword(password, 13);
         }
+
+        public bool IsPasswordValid(string password)
+            => BCrypt.Net.BCrypt.Verify(password, PasswordHash);
+        
 
         private void SetEmail(string email)
         {
