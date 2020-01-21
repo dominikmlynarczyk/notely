@@ -12,10 +12,12 @@ namespace Notely.Infrastructure.Users
         public UserMappingProfile()
         {
             CreateMap<User, UserEntity>()
-                .ForMember(x => x.Id, opt => opt.MapFrom(x => x.Id));
+                .ForMember(x => x.Id, opt => opt.MapFrom(x => x.Id.Id));
 
             CreateMap<UserEntity, User>()
-                .ForMember(x => x.Id, opt => opt.MapFrom(x => new AggregateId(x.Id)));
+                .ForMember(x => x.Id, opt => opt.MapFrom(x => x.Id));
+
+            CreateMap<Guid, AggregateId>().ConstructUsing(x => new AggregateId(x));
         }
     }
 }

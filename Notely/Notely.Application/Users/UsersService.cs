@@ -1,7 +1,9 @@
-﻿using Notely.Domain.Users;
+﻿using System.Security.Cryptography.X509Certificates;
+using Notely.Domain.Users;
 using Notely.Domain.Users.DataStructures;
 using Notely.Domain.Users.Factories;
 using Notely.Domain.Users.Policies;
+using Notely.Infrastructure;
 using Notely.Infrastructure.Users;
 using Notely.SharedKernel.Exceptions;
 
@@ -12,17 +14,24 @@ namespace Notely.Application.Users
         private readonly IUsersRepository _usersRepository;
         private readonly IUserFactory _userFactory;
         private readonly IPasswordPolicyFactory _passwordPolicyFactory;
+        private readonly ISession _session;
 
-        public UsersService(IUsersRepository usersRepository, IUserFactory userFactory, IPasswordPolicyFactory passwordPolicyFactory)
+        public UsersService(IUsersRepository usersRepository, IUserFactory userFactory, IPasswordPolicyFactory passwordPolicyFactory, ISession session)
         {
             _usersRepository = usersRepository;
             _userFactory = userFactory;
             _passwordPolicyFactory = passwordPolicyFactory;
+            _session = session;
         }
 
         public User RegisterUser(CreateUserDataStructure dataStructure, string password, string confirmPassword)
         {
-            var user = _userFactory.Create(dataStructure);
+            var user = _usersRepository.Get(x => x.UserName == dataStructure.UserName);
+            if (user != null)
+            {
+                throw new BusinessLogicException("User already exists");
+            }
+            user = _userFactory.Create(dataStructure);
             CheckPasswords(password, confirmPassword);
             user.SetPassword(password, _passwordPolicyFactory.Create<FourLettersPasswordPolicy>());
 
@@ -43,6 +52,9 @@ namespace Notely.Application.Users
                 throw new BusinessLogicException("Incorrect credentials");
             }
 
+            _session.UserId = user.Id.Id;
+            _session.UserName = user.UserName;
+            _session.FullName = $"{user.FirstName} {user.SecondName}";
             return user;
         }
 

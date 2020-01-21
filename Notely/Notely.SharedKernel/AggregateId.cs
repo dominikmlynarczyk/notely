@@ -4,12 +4,12 @@ namespace Notely.SharedKernel
 {
     public struct AggregateId : IEquatable<AggregateId>
     {
-        public Guid Id { get; private set; }
-
         public AggregateId(Guid id)
         {
             Id = id;
         }
+
+        public Guid Id;
 
         public bool Equals(AggregateId other)
         {

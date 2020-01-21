@@ -26,7 +26,7 @@ namespace Notely.Domain.Users
 
         public void SetPassword(string password, IPasswordPolicy policy)
         {
-            if (policy.IsPasswordValid(password))
+            if (!policy.IsPasswordValid(password))
             {
                 throw new BusinessLogicException("Password doesn't match requirements.");
             }

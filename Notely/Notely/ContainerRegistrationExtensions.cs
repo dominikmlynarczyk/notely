@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 using Autofac;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,7 @@ using Notely.Infrastructure;
 using Notely.Infrastructure.Users;
 using Notely.SharedKernel.Application.Handlers;
 using Notely.SharedKernel.Infrastructure.Repositories;
+using Notely.UserControls;
 
 namespace Notely
 {
@@ -83,9 +85,23 @@ namespace Notely
             return builder;
         }
 
-        public static ContainerBuilder RegisterDbContext(this ContainerBuilder builder)
+        public static ContainerBuilder RegisterDbContext(this ContainerBuilder builder, string connectionString)
         {
-            builder.Register(c => new NotelyDbContext()).As<DbContext>().AsSelf();
+            var options = new DbContextOptionsBuilder<NotelyDbContext>().UseSqlite(connectionString).Options;
+            builder.Register(c => new NotelyDbContext(options)).As<DbContext>().AsSelf();
+            return builder;
+        }
+
+        public static ContainerBuilder RegisterSession(this ContainerBuilder builder)
+        {
+            builder.RegisterType<Session>().As<ISession>().SingleInstance();
+            return builder;
+        }
+
+        public static ContainerBuilder RegisterUserControls(this ContainerBuilder builder)
+        {
+            builder.RegisterAssemblyTypes(typeof(INotelyControl).Assembly)
+                .Where(x => x.IsAssignableTo<INotelyControl>()).AsImplementedInterfaces();
             return builder;
         }
     }

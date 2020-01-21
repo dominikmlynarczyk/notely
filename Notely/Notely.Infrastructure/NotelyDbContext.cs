@@ -7,11 +7,15 @@ namespace Notely.Infrastructure
     {
         public DbSet<UserEntity> Users { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public NotelyDbContext(DbContextOptions<NotelyDbContext> options) : base(options)
         {
-            optionsBuilder.UseSqlite("Filename=Notely.db");
-            base.OnConfiguring(optionsBuilder);
         }
+        //
+        // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        // {
+        //     optionsBuilder.UseSqlite($"Filename=Notely.db");
+        //     base.OnConfiguring(optionsBuilder);
+        // }
         
     }
 }
