@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notely.Application", "Notel
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notely.SharedKernel", "Notely.SharedKernel\Notely.SharedKernel.csproj", "{D664A3D4-BE1D-434D-959A-8F096841837B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notely.Domain.UnitTests", "Notely.Domain.UnitTests\Notely.Domain.UnitTests.csproj", "{896FBC67-CD44-4CB0-9536-9143401C46FF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,14 @@ Global
 		{D664A3D4-BE1D-434D-959A-8F096841837B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D664A3D4-BE1D-434D-959A-8F096841837B}.Release|x64.ActiveCfg = Release|x64
 		{D664A3D4-BE1D-434D-959A-8F096841837B}.Release|x64.Build.0 = Release|x64
+		{896FBC67-CD44-4CB0-9536-9143401C46FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{896FBC67-CD44-4CB0-9536-9143401C46FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{896FBC67-CD44-4CB0-9536-9143401C46FF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{896FBC67-CD44-4CB0-9536-9143401C46FF}.Debug|x64.Build.0 = Debug|Any CPU
+		{896FBC67-CD44-4CB0-9536-9143401C46FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{896FBC67-CD44-4CB0-9536-9143401C46FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{896FBC67-CD44-4CB0-9536-9143401C46FF}.Release|x64.ActiveCfg = Release|Any CPU
+		{896FBC67-CD44-4CB0-9536-9143401C46FF}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
