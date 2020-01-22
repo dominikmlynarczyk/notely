@@ -10,7 +10,7 @@ namespace Notely.Domain.UnitTests
     public class UserTests
     {
         [TestMethod]
-        public void Should_Login_User_With_Correct_Password()
+        public void Should_Register_User_With_Correct_Password()
         {
             var user = new User(new AggregateId(Guid.NewGuid()), "xxx", "xxx", "xxx", "xxx@xxx.com");
 
@@ -23,7 +23,7 @@ namespace Notely.Domain.UnitTests
         }
 
         [TestMethod]
-        public void Should_Not_Login_With_Incorrect_Password()
+        public void Should_Not_Register_With_Incorrect_Password()
         {
             var user = new User(new AggregateId(Guid.NewGuid()), "xxx", "xxx", "xxx", "xxx@xxx.com");
 
@@ -35,33 +35,31 @@ namespace Notely.Domain.UnitTests
         }
 
         [TestMethod]
-        public void Should_Not_Login_With_Empty_UserName()
+        public void Should_Not_Register_With_Empty_UserName()
         {
             Assert.ThrowsException<ArgumentNullException>(() =>
                 new User(new AggregateId(Guid.NewGuid()), "", "xxx", "xxx", "xxx@xxx.com"));
         }
 
         [TestMethod]
-        public void Should_Not_Login_With_Empty_FirstName()
+        public void Should_Not_Register_With_Empty_FirstName()
         {
             Assert.ThrowsException<ArgumentNullException>(() =>
                 new User(new AggregateId(Guid.NewGuid()), "xxx", "", "xxx", "xxx@xxx.com"));
         }
 
         [TestMethod]
-        public void Should_Not_Login_With_Empty_SecondName()
+        public void Should_Not_Register_With_Empty_SecondName()
         {
             Assert.ThrowsException<ArgumentNullException>(() =>
                 new User(new AggregateId(Guid.NewGuid()), "xxx", "xxx", "", "xxx@xxx.com"));
         }
 
         [TestMethod]
-        public void Should_Not_Login_With_Empty_Email()
+        public void Should_Not_Register_With_Empty_Email()
         {
             Assert.ThrowsException<ArgumentNullException>(() =>
                 new User(new AggregateId(Guid.NewGuid()), "xxx", "", "xxx", ""));
         }
-
-        
     }
 }
