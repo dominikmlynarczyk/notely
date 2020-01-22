@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Notely.Domain.Users;
 using Notely.Domain.Users.Policies;
 using Notely.SharedKernel;
+using Notely.SharedKernel.Exceptions;
 
 namespace Notely.Domain.UnitTests
 {
@@ -60,6 +61,14 @@ namespace Notely.Domain.UnitTests
         {
             Assert.ThrowsException<ArgumentNullException>(() =>
                 new User(new AggregateId(Guid.NewGuid()), "xxx", "", "xxx", ""));
+        }
+
+        [TestMethod]
+        public void Should_Not_Register_With_Below_4Char_Password()
+        {
+            var user = new User(new AggregateId(Guid.NewGuid()), "xxx", "xxx", "xxx", "xxx@xxx.com");
+
+            Assert.ThrowsException<BusinessLogicException>(() => user.SetPassword("123", new FourLettersPasswordPolicy()));
         }
     }
 }
