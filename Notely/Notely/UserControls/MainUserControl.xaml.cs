@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
+using Notely.Application.Notes.Commands;
+using Notely.Application.Notes.Queries;
 
 namespace Notely.UserControls
 {
@@ -20,10 +23,41 @@ namespace Notely.UserControls
     /// </summary>
     public partial class MainUserControl : UserControl
     {
+        public Action<CreateNoteCommand> OnSaveFile;
+        public Action<GetNoteContentQuery> OnOpenFile;
         public MainUserControl()
         {
             InitializeComponent();
             MainMarkdownEditor.AutoUpdateInterval = 1;
+        }
+
+        private void SaveButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var contentPath = "";
+            var dialog = new SaveFileDialog {DefaultExt = "md"};
+            if (dialog.ShowDialog() == true)
+            {
+                var command = new CreateNoteCommand("newTest", dialog.FileName, MainMarkdownEditor.Text);
+                OnSaveFile?.Invoke(command);
+            }
+            else
+            {
+                MessageBox.Show("You have to set filename");
+            }
+        }
+
+        private void OpenButton_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new OpenFileDialog { DefaultExt = "md" };
+            if (dialog.ShowDialog() == true)
+            {
+                var query = new GetNoteContentQuery(dialog.FileName);
+                OnOpenFile?.Invoke(query);
+            }
+            else
+            {
+                MessageBox.Show("You have to choose file");
+            }
         }
     }
 }

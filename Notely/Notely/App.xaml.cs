@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using Autofac;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +20,7 @@ namespace Notely
             builder.RegisterDomainFactories();
             builder.RegisterDbContext(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
             builder.RegisterCommandHandlers();
+            builder.RegisterQueryHandlers();
             builder.RegisterRepositories();
             builder.RegisterServices();
             builder.RegisterMapper();

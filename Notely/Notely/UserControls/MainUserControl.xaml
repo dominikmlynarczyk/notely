@@ -9,27 +9,34 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
+        <Grid.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="100"></RowDefinition>
         </Grid.RowDefinitions>
-        <TabControl>
-            <TabItem Header="Edit">
-                <TabItem.Resources>
-                    <ResourceDictionary>
-                        <ResourceDictionary.MergedDictionaries>
-                            <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
-                            <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
-                            <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
-                            <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
-                        </ResourceDictionary.MergedDictionaries>
-                    </ResourceDictionary>
-                </TabItem.Resources>
+        <TabControl Name="MainTabControl">
+            <TabItem Name="OpenTabItem" TabIndex="0" Header="Open">
+                <Button Name="OpenButton" HorizontalAlignment="Center" Content="Open file" Height="100" Width="Auto" Click="OpenButton_Click"/>
+            </TabItem>
+            <TabItem Name="EditTabItem" TabIndex="1" Header="Edit">
+                
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="50"></RowDefinition>
+                    </Grid.RowDefinitions>
                     <editor:MarkdownEditor x:Name="MainMarkdownEditor" 
                               AutoUpdate="{Binding ElementName=AutoUpdateCheckBox2, Path=IsChecked, Mode=TwoWay}"
                               AutoUpdateInterval="{Binding ElementName=AutoUpdateIntervalTextBox2, Path=Text}"
@@ -47,6 +54,7 @@
                             </Style>
                         </editor:MarkdownEditor.Resources>
                     </editor:MarkdownEditor>
+                    <Button Name="SaveButton"  Grid.Row="1" Width="100" Content="Save" Click="SaveButton_OnClick"></Button>
                 </Grid>
             </TabItem>
         </TabControl>

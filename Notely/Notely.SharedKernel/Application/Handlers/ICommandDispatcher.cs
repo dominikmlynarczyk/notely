@@ -1,7 +1,9 @@
-﻿namespace Notely.SharedKernel.Application.Handlers
+﻿using System.Threading.Tasks;
+
+namespace Notely.SharedKernel.Application.Handlers
 {
     public interface ICommandDispatcher
     {
-        void Dispatch<TCommand>(TCommand command) where TCommand : ICommand;
+        Task Dispatch<TCommand>(TCommand command) where TCommand : ICommand;
     }
 }

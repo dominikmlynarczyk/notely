@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Threading.Tasks;
 using Notely.Application.Users.Commands;
 using Notely.Domain.Users.DataStructures;
 using Notely.SharedKernel.Application.Handlers;
@@ -16,9 +14,9 @@ namespace Notely.Application.Users.Handlers
             _usersService = usersService;
         }
 
-        public void Handle(RegisterUserCommand command)
+        public async Task Handle(RegisterUserCommand command)
         {
-            _usersService.RegisterUser(new CreateUserDataStructure(
+            await _usersService.RegisterUser(new CreateUserDataStructure(
                     command.Id, command.UserName, command.FirstName, command.SecondName, command.Email),
                 command.Password,
                 command.ConfirmPassword);
@@ -33,9 +31,9 @@ namespace Notely.Application.Users.Handlers
             _usersService = usersService;
         }
 
-        public void Handle(LoginUserCommand command)
+        public async Task Handle(LoginUserCommand command)
         {
-            _usersService.Login(command.UserName, command.Password);
+            await _usersService.Login(command.UserName, command.Password);
         }
     }
 }

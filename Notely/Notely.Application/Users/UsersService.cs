@@ -1,4 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿using System.Threading.Tasks;
 using Notely.Domain.Users;
 using Notely.Domain.Users.DataStructures;
 using Notely.Domain.Users.Factories;
@@ -24,9 +24,9 @@ namespace Notely.Application.Users
             _session = session;
         }
 
-        public User RegisterUser(CreateUserDataStructure dataStructure, string password, string confirmPassword)
+        public async Task<User> RegisterUser(CreateUserDataStructure dataStructure, string password, string confirmPassword)
         {
-            var user = _usersRepository.Get(x => x.UserName == dataStructure.UserName);
+            var user = await _usersRepository.Get(x => x.UserName == dataStructure.UserName);
             if (user != null)
             {
                 throw new BusinessLogicException("User already exists");
@@ -39,9 +39,9 @@ namespace Notely.Application.Users
             return user;
         }
 
-        public User Login(string userName, string password)
+        public async Task<User> Login(string userName, string password)
         {
-            var user = _usersRepository.Get(x => x.UserName == userName);
+            var user = await _usersRepository.Get(x => x.UserName == userName);
             if (user == null)
             {
                 throw new BusinessLogicException("Incorrect credentials");

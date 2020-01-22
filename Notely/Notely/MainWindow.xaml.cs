@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows;
 using Autofac;
+using Notely.Application.Notes.Commands;
+using Notely.Application.Notes.Queries;
 using Notely.Application.Users.Commands;
 using Notely.Infrastructure;
+using Notely.SharedKernel;
 using Notely.SharedKernel.Application.Handlers;
 using Notely.UserControls;
 
@@ -15,16 +19,36 @@ namespace Notely
     {
         private readonly ICommandDispatcher _commandDispatcher;
         private readonly ISession _session;
-        private readonly IComponentContext _componentContext;
-        public MainWindow(ICommandDispatcher commandDispatcher, ISession session, IComponentContext componentContext)
+        private readonly IQueryDispatcher _queryDispatcher;
+        private AggregateId? _noteId;
+        public MainWindow(ICommandDispatcher commandDispatcher, ISession session, IQueryDispatcher queryDispatcher)
         {
             _commandDispatcher = commandDispatcher;
             _session = session;
-            _componentContext = componentContext;
+            _queryDispatcher = queryDispatcher;
             InitializeComponent();
             LoggingControl.OnSigningInEvent += OnSigningInEventHandler;
             LoggingControl.OnSigningUpEvent += OnSigningUpEventHandler;
+            MainUserControl.OnSaveFile += SaveFile;
+            MainUserControl.OnOpenFile += OpenFile;
             _session.OnIsAuthenticatedChanged += OnIsAuthenticatedChangedEventHandler;
+        }
+
+        private async void OpenFile(GetNoteContentQuery query)
+        {
+            var content = await _queryDispatcher.Dispatch<GetNoteContentQuery, string>(query);
+            MainUserControl.MainMarkdownEditor.Text = content;
+            MainUserControl.MainTabControl.SelectedItem = MainUserControl.EditTabItem;
+        }
+
+        private void SaveFile(CreateNoteCommand command)
+        {
+            if (!_noteId.HasValue)
+            {
+
+                _commandDispatcher.Dispatch(command);
+                _noteId = command.Id;
+            }
         }
 
         private void OnIsAuthenticatedChangedEventHandler(bool isAuthenticated)
@@ -47,16 +71,16 @@ namespace Notely
             }
         }
 
-        private void OnSigningUpEventHandler(RegisterUserCommand command)
+        private async void OnSigningUpEventHandler(RegisterUserCommand command)
         {
-            _commandDispatcher.Dispatch(command);
+            await _commandDispatcher.Dispatch(command);
             LoggingControl.TabIndex = 0;
         }
 
-        private void OnSigningInEventHandler((string username, string password) credentials)
+        private async void OnSigningInEventHandler((string username, string password) credentials)
         {
             var command = new LoginUserCommand(credentials.username, credentials.password);
-            _commandDispatcher.Dispatch(command);
+            await _commandDispatcher.Dispatch(command);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

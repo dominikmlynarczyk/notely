@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Threading;
+using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,26 +21,32 @@ namespace Notely.SharedKernel.Infrastructure.Repositories
             Mapper = mapper;
         }
 
-        public TAggregate Get(Func<TEntity, bool> expression)
-            => Mapper.Map<TAggregate>(Set.SingleOrDefault(expression));
+        public async Task<TAggregate> Get(Expression<Func<TEntity, bool>> expression)
+        {
+            var entity = await Set.SingleOrDefaultAsync(expression, CancellationToken.None);
+            return Mapper.Map<TAggregate>(entity);
+        }
 
-        public IEnumerable<TAggregate> GetAll()
-            => Mapper.Map<IEnumerable<TAggregate>>(Set.ToList());
+        public async Task<IEnumerable<TAggregate>> GetAll()
+        {
+            var elements = await Set.ToListAsync();
+            return Mapper.Map<IEnumerable<TAggregate>>(elements);
+        }
 
-        public void Add(TAggregate aggregateRoot)
+        public async Task Add(TAggregate aggregateRoot)
         {
             var entity = Mapper.Map<TEntity>(aggregateRoot);
             Set.Add(entity);
-            Context.SaveChanges();
+            await Context.SaveChangesAsync();
         }
 
-        public void Update(TAggregate aggregateRoot)
+        public async Task Update(TAggregate aggregateRoot)
         {
             var entity = Mapper.Map<TEntity>(aggregateRoot);
             var entityInDb = Set.SingleOrDefault(x => x.Id == entity.Id);
             entityInDb = entity;
             Set.Update(entityInDb);
-            Context.SaveChanges();
+            await Context.SaveChangesAsync();
         }
     }
 }

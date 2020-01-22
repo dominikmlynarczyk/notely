@@ -50,18 +50,17 @@ namespace Notely
         {
             builder.RegisterAssemblyTypes(_applicationAssembly)
                 .AsClosedTypesOf(typeof(ICommandHandler<>));
-            builder.Register<Func<Type, ICommandHandler>>(c =>
-        {
-            var ctx = c.Resolve<IComponentContext>();
- 
-            return t =>
-            {
-                var handlerType = typeof (ICommandHandler<>).MakeGenericType(t);
-                return (ICommandHandler) ctx.Resolve(handlerType);
-            };
-        });
 
             builder.RegisterType<CommandDispatcher>().As<ICommandDispatcher>();
+            return builder;
+        }
+
+        public static ContainerBuilder RegisterQueryHandlers(this ContainerBuilder builder)
+        {
+            builder.RegisterAssemblyTypes(_applicationAssembly)
+                .AsClosedTypesOf(typeof(IQueryHandler<,>));
+
+            builder.RegisterType<QueryDispatcher>().As<IQueryDispatcher>();
             return builder;
         }
 

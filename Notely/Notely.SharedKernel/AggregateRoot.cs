@@ -20,5 +20,10 @@ namespace Notely.SharedKernel
             ModifiedDate = DateTime.UtcNow;
             IsArchived = false;
         }
+
+        public virtual void Archive()
+        {
+            IsArchived = true;
+        }
     }
 }
