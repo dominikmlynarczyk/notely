@@ -9,23 +9,23 @@
     <Grid>
         <TabControl>
             <TabItem Padding="10,10,10,10" Header="Login">
-                <Grid Background="#FFE5E5E5">
+                <Grid Background="#999">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height=".3*"></RowDefinition>
-                        <RowDefinition Height=".3*"></RowDefinition>
-                        <RowDefinition Height=".4*"></RowDefinition>
-                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height=".2*"></RowDefinition>
+                        <RowDefinition Height=".1*"></RowDefinition>
+                        <RowDefinition Height=".1*"></RowDefinition>
+                        <RowDefinition Height=".1*"></RowDefinition>
+                        <RowDefinition Height=".2*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <TextBox Name="LoginUserNameTextBox" Grid.Column="1" Grid.Row="1" VerticalContentAlignment="Center" FontSize="18" />
-                    <Label VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="1" Content="User name:" FontSize="18"></Label>
-                    <PasswordBox Name="LoginPasswordTextBox"  Grid.Column="1" Grid.Row="2" FontSize="18" VerticalContentAlignment="Center" />
+                    <TextBox Name="LoginUserNameTextBox" Grid.Column="1" Grid.Row="1" VerticalContentAlignment="Center" FontSize="18" Margin="100, 5, 100, 5" />
+                    <Label VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="1" Content="User name:" FontSize="18" ></Label>
+                    <PasswordBox Name="LoginPasswordTextBox"  Grid.Column="1" Grid.Row="2" FontSize="18" VerticalContentAlignment="Center" Margin="100,5,100,5" />
                     <Label VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="2" Content="Password:" FontSize="18"></Label>
-                    <Button Name="LoginButton" Grid.Column="1" Grid.Row="3" Content="Sign in" FontSize="18" Click="Button_Click"></Button>
+                    <Button Name="LoginButton" Grid.Column="1" Grid.Row="3" Content="Sign in" FontSize="18" Click="Button_Click" Margin="100, 5, 100, 5" Background="#059DC0"></Button>
                 </Grid>
             </TabItem>
             <TabItem Header="Register">

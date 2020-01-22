@@ -33,5 +33,35 @@ namespace Notely.Domain.UnitTests
 
             Assert.IsFalse(result);
         }
+
+        [TestMethod]
+        public void Should_Not_Login_With_Empty_UserName()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() =>
+                new User(new AggregateId(Guid.NewGuid()), "", "xxx", "xxx", "xxx@xxx.com"));
+        }
+
+        [TestMethod]
+        public void Should_Not_Login_With_Empty_FirstName()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() =>
+                new User(new AggregateId(Guid.NewGuid()), "xxx", "", "xxx", "xxx@xxx.com"));
+        }
+
+        [TestMethod]
+        public void Should_Not_Login_With_Empty_SecondName()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() =>
+                new User(new AggregateId(Guid.NewGuid()), "xxx", "xxx", "", "xxx@xxx.com"));
+        }
+
+        [TestMethod]
+        public void Should_Not_Login_With_Empty_Email()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() =>
+                new User(new AggregateId(Guid.NewGuid()), "xxx", "", "xxx", ""));
+        }
+
+        
     }
 }
