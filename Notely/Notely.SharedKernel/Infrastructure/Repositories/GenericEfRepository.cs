@@ -44,9 +44,18 @@ namespace Notely.SharedKernel.Infrastructure.Repositories
         {
             var entity = Mapper.Map<TEntity>(aggregateRoot);
             var entityInDb = Set.SingleOrDefault(x => x.Id == entity.Id);
-            entityInDb = entity;
+            UpdateExistingEntityWithUpdatedEntity(entityInDb, entity);
             Set.Update(entityInDb);
             await Context.SaveChangesAsync();
+        }
+
+        private void UpdateExistingEntityWithUpdatedEntity(TEntity entity, TEntity updatedEntity)
+        {
+            var properties = entity.GetType().GetProperties();
+            foreach (var propertyInfo in properties)
+            {
+                propertyInfo.SetValue(entity, updatedEntity.GetType().GetProperty(propertyInfo.Name).GetValue(updatedEntity));
+            }
         }
     }
 }

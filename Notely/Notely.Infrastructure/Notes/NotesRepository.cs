@@ -1,4 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
@@ -15,10 +18,6 @@ namespace Notely.Infrastructure.Notes
 
         public async Task SaveNoteFile(string filePath, string content)
         {
-            if (File.Exists(filePath))
-            {
-                throw new FileNotFoundException(filePath);
-            }
             using (var sw = new StreamWriter(filePath))
             {
                 await sw.WriteAsync(content);
@@ -27,11 +26,23 @@ namespace Notely.Infrastructure.Notes
 
         public async Task<string> GetNoteContent(string filePath)
         {
-
+            if (!File.Exists(filePath))
+            {
+                throw new FileNotFoundException(filePath);
+            }
             using (var sw = new StreamReader(filePath))
             {
                 return await sw.ReadToEndAsync();
             }
         }
+
+        public async Task<IEnumerable<Note>> GetNotesForUser(Guid sessionUserId, string queryName)
+        {
+            var elements = string.IsNullOrWhiteSpace(queryName)
+                ? await Set.Where(x => x.UserId == sessionUserId).ToListAsync()
+                : await Set.Where(x => x.Name.Contains(queryName) && x.UserId == sessionUserId).ToListAsync();
+            return Mapper.Map<IEnumerable<Note>>(elements);
+        }
+            
     }
 }

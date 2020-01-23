@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -8,13 +9,17 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup.Localizer;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
 using Notely.Application.Notes.Commands;
+using Notely.Application.Notes.DTOs;
 using Notely.Application.Notes.Queries;
+using Notely.SharedKernel;
+using Notely.SharedKernel.Exceptions;
 
 namespace Notely.UserControls
 {
@@ -23,27 +28,58 @@ namespace Notely.UserControls
     /// </summary>
     public partial class MainUserControl : UserControl
     {
-        public Action<CreateNoteCommand> OnSaveFile;
+        public Action<CreateNoteCommand> OnSaveNote;
+        public Action<UpdateNoteCommand> OnUpdateNote;
         public Action<GetNoteContentQuery> OnOpenFile;
+        public Action<string> OnDataGridRefreshed;
+        public List<NoteDto> Notes;
+        private Guid? _noteId;
+        private string _notePath;
         public MainUserControl()
         {
             InitializeComponent();
             MainMarkdownEditor.AutoUpdateInterval = 1;
         }
 
+        public void SetNotes(IEnumerable<NoteDto> elements)
+        {
+            Notes = elements.ToList();
+            NotesDataGrid.ItemsSource = null;
+            NotesDataGrid.ItemsSource = Notes;
+        }
+
         private void SaveButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var contentPath = "";
-            var dialog = new SaveFileDialog {DefaultExt = "md"};
-            if (dialog.ShowDialog() == true)
+            var fileName = _notePath;
+            if (string.IsNullOrWhiteSpace(fileName) && !_noteId.HasValue)
             {
-                var command = new CreateNoteCommand("newTest", dialog.FileName, MainMarkdownEditor.Text);
-                OnSaveFile?.Invoke(command);
+                var dialog = new SaveFileDialog {DefaultExt = "md"};
+                if (dialog.ShowDialog() == true)
+                {
+                    fileName = dialog.FileName;
+                }
+                else
+                {
+                    MessageBox.Show("You have to set filename");
+                }
+                var command = new CreateNoteCommand(EditNameTextBox.Text, fileName, MainMarkdownEditor.Text);
+                OnSaveNote?.Invoke(command);
+                SetNoteInfo(command.Id, fileName);
             }
             else
             {
-                MessageBox.Show("You have to set filename");
+                var command = new UpdateNoteCommand(new AggregateId(_noteId.Value), EditNameTextBox.Text, fileName, MainMarkdownEditor.Text);
+                OnUpdateNote?.Invoke(command);
+                SetNoteInfo(command.Id, fileName);
             }
+            MessageBox.Show("Note saved successfully", "Success", MessageBoxButton.OK);
+            OnDataGridRefreshed?.Invoke(NameTextBox.Text);
+        }
+
+        private void SetNoteInfo(AggregateId commandId, string fileName)
+        {
+            _noteId = commandId.Id;
+            _notePath = fileName;
         }
 
         private void OpenButton_Click(object sender, RoutedEventArgs e)
@@ -58,6 +94,38 @@ namespace Notely.UserControls
             {
                 MessageBox.Show("You have to choose file");
             }
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            NotesDataGrid.DataContext = Notes;
+            OnDataGridRefreshed?.Invoke(NameTextBox.Text);
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            var noteId = ((Button)sender).Tag.ToString();
+
+            var note = Notes.SingleOrDefault(x => x.Id == new Guid(noteId));
+            if (note == null)
+            {
+                throw new BusinessLogicException("Note not found");
+            }
+            OnOpenFile?.Invoke(new GetNoteContentQuery(note.ContentPath));
+            _notePath = note.ContentPath;
+            _noteId = note.Id;
+            EditNameTextBox.Text = note.Name;
+        }
+
+        private void NameTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            OnDataGridRefreshed?.Invoke(NameTextBox.Text);
+        }
+
+        private void MainTabControl_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            NotesDataGrid.DataContext = Notes;
+            OnDataGridRefreshed?.Invoke(NameTextBox.Text);
         }
     }
 }

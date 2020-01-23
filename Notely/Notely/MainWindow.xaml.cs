@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using Autofac;
 using Notely.Application.Notes.Commands;
+using Notely.Application.Notes.DTOs;
 using Notely.Application.Notes.Queries;
 using Notely.Application.Users.Commands;
 using Notely.Infrastructure;
@@ -29,9 +31,24 @@ namespace Notely
             InitializeComponent();
             LoggingControl.OnSigningInEvent += OnSigningInEventHandler;
             LoggingControl.OnSigningUpEvent += OnSigningUpEventHandler;
-            MainUserControl.OnSaveFile += SaveFile;
+            MainUserControl.OnSaveNote += SaveNote;
+            MainUserControl.OnUpdateNote += UpdateNote;
             MainUserControl.OnOpenFile += OpenFile;
+            MainUserControl.OnDataGridRefreshed += LoadNotes;
             _session.OnIsAuthenticatedChanged += OnIsAuthenticatedChangedEventHandler;
+        }
+
+        private void UpdateNote(UpdateNoteCommand command)
+        {
+            _commandDispatcher.Dispatch(command);
+        }
+
+        private async void LoadNotes(string obj)
+        {
+            var elements =
+                await _queryDispatcher.Dispatch<GetNotesForUserQuery, IEnumerable<NoteDto>>(
+                    new GetNotesForUserQuery(obj));
+            MainUserControl.SetNotes(elements);
         }
 
         private async void OpenFile(GetNoteContentQuery query)
@@ -41,7 +58,7 @@ namespace Notely
             MainUserControl.MainTabControl.SelectedItem = MainUserControl.EditTabItem;
         }
 
-        private void SaveFile(CreateNoteCommand command)
+        private void SaveNote(CreateNoteCommand command)
         {
             if (!_noteId.HasValue)
             {
@@ -60,6 +77,7 @@ namespace Notely
                 SignOutButton.Visibility = Visibility.Visible;
                 NameLabel.Visibility = Visibility.Visible;
                 NameLabel.Content = String.Format(NameLabel.Content.ToString(), string.IsNullOrWhiteSpace(_session.FullName) ? _session.UserName : _session.FullName);
+                
             }
             else
             {
