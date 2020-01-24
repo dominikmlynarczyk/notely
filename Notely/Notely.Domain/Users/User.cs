@@ -24,6 +24,15 @@ namespace Notely.Domain.Users
             SetEmail(email);
         }
 
+        public void Update(string userName, string firstName, string secondName, string email)
+        {
+            SetUserName(userName);
+            SetFirstName(firstName);
+            SetSecondName(secondName);
+            SetEmail(email);
+            ModifiedDate = DateTime.UtcNow;
+        }
+
         public void SetPassword(string password, IPasswordPolicy policy)
         {
             if (!policy.IsPasswordValid(password))

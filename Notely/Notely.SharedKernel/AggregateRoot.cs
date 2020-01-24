@@ -6,7 +6,7 @@ namespace Notely.SharedKernel
     {
         public AggregateId Id { get; private set; }
         public DateTime CreatedDate { get; private set; }
-        public DateTime ModifiedDate { get; private set; }
+        public DateTime ModifiedDate { get; protected set; }
         public bool IsArchived { get; private set; }
 
         protected AggregateRoot()

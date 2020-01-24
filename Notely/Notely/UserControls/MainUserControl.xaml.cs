@@ -31,6 +31,7 @@ namespace Notely.UserControls
         public Action<CreateNoteCommand> OnSaveNote;
         public Action<UpdateNoteCommand> OnUpdateNote;
         public Action<GetNoteContentQuery> OnOpenFile;
+        public Action<DeleteNoteCommand> OnDeleteNote;
         public Action<string> OnDataGridRefreshed;
         public List<NoteDto> Notes;
         private Guid? _noteId;
@@ -53,7 +54,7 @@ namespace Notely.UserControls
             var fileName = _notePath;
             if (string.IsNullOrWhiteSpace(fileName) && !_noteId.HasValue)
             {
-                var dialog = new SaveFileDialog {DefaultExt = "md"};
+                var dialog = new SaveFileDialog {DefaultExt = "md", Filter = "Md file (*.md)|*.md", FileName = EditNameTextBox.Text };
                 if (dialog.ShowDialog() == true)
                 {
                     fileName = dialog.FileName;
@@ -84,7 +85,7 @@ namespace Notely.UserControls
 
         private void OpenButton_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new OpenFileDialog { DefaultExt = "md" };
+            var dialog = new OpenFileDialog { DefaultExt = "md", Filter = "Md file (*.md)|*.md"};
             if (dialog.ShowDialog() == true)
             {
                 var query = new GetNoteContentQuery(dialog.FileName);
@@ -126,6 +127,29 @@ namespace Notely.UserControls
         {
             NotesDataGrid.DataContext = Notes;
             OnDataGridRefreshed?.Invoke(NameTextBox.Text);
+        }
+
+        private void DeleteButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            var noteId = ((Button)sender).Tag.ToString();
+
+            var note = Notes.SingleOrDefault(x => x.Id == new Guid(noteId));
+            if (note == null)
+            {
+                throw new BusinessLogicException("Note not found");
+            }
+            OnDeleteNote?.Invoke(new DeleteNoteCommand(new AggregateId(note.Id)));
+            OnDataGridRefreshed?.Invoke(NameTextBox.Text);
+        }
+
+        private void NewNoteButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            MainMarkdownEditor.Text = string.Empty;
+            MainMarkdownEditor.Text += " ";
+            _noteId = null;
+            _notePath = null;
+            EditNameTextBox.Text = string.Empty;
+            MainTabControl.SelectedItem = EditTabItem;
         }
     }
 }

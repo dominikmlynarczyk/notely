@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Notely.Application.Notes.DTOs;
@@ -66,9 +67,17 @@ namespace Notely.Application.Notes
             await _notesRepository.SaveNoteFile(note.ContentPath, content);
         }
 
+        public async Task DeleteNote(AggregateId id)
+        {
+            var note = await GetNoteOrThrow(id);
+            note.Archive();
+            await _notesRepository.Update(note);
+            _notesRepository.DeleteNoteFile(note.ContentPath);
+        }
+
         private Task<Note> GetNoteOrThrow(AggregateId id)
         {
-            var note = _notesRepository.Get(x => x.Id == id.Id);
+            var note = _notesRepository.Get(x => x.Id == id.Id && !x.IsArchived);
             if (note == null)
             {
                 throw new BusinessLogicException("Note not found");

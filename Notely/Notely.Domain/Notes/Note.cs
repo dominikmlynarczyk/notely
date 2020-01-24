@@ -24,6 +24,7 @@ namespace Notely.Domain.Notes
         {
             SetContentPath(contentPath);
             SetName(name);
+            ModifiedDate = DateTime.UtcNow;
         }
 
         private void SetName(string name)

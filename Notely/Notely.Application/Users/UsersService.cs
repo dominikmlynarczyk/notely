@@ -5,6 +5,7 @@ using Notely.Domain.Users.Factories;
 using Notely.Domain.Users.Policies;
 using Notely.Infrastructure;
 using Notely.Infrastructure.Users;
+using Notely.SharedKernel;
 using Notely.SharedKernel.Exceptions;
 
 namespace Notely.Application.Users
@@ -41,7 +42,7 @@ namespace Notely.Application.Users
 
         public async Task<User> Login(string userName, string password)
         {
-            var user = await _usersRepository.Get(x => x.UserName == userName);
+            var user = await _usersRepository.Get(x => x.UserName == userName && !x.IsArchived);
             if (user == null)
             {
                 throw new BusinessLogicException("Incorrect credentials");
@@ -55,6 +56,31 @@ namespace Notely.Application.Users
             _session.UserId = user.Id.Id;
             _session.UserName = user.UserName;
             _session.FullName = $"{user.FirstName} {user.SecondName}";
+            return user;
+        }
+
+        public async Task<User> GetUser(AggregateId userId) => await _usersRepository.Get(x => x.Id == userId.Id);
+        public async Task UpdateUser(CreateUserDataStructure dataStructure)
+        {
+            var user = await GetUserOrThrow(dataStructure.Id);
+            user.Update(dataStructure.UserName, dataStructure.FirstName, dataStructure.SecondName, dataStructure.Email);
+            await _usersRepository.Update(user);
+        }
+        public async Task DeleteUser(AggregateId id)
+        {
+            var user = await GetUserOrThrow(id);
+            user.Archive();
+            await _usersRepository.Update(user);
+        }
+
+        private async Task<User> GetUserOrThrow(AggregateId id)
+        {
+            var user = await _usersRepository.Get(x => x.Id == id.Id && !x.IsArchived);
+            if (user == null)
+            {
+                throw new BusinessLogicException("User not found");
+            }
+
             return user;
         }
 

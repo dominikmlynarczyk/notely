@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Windows;
-using Autofac;
 using Notely.Application.Notes.Commands;
 using Notely.Application.Notes.DTOs;
 using Notely.Application.Notes.Queries;
@@ -10,7 +8,7 @@ using Notely.Application.Users.Commands;
 using Notely.Infrastructure;
 using Notely.SharedKernel;
 using Notely.SharedKernel.Application.Handlers;
-using Notely.UserControls;
+using Notely.Windows;
 
 namespace Notely
 {
@@ -35,12 +33,18 @@ namespace Notely
             MainUserControl.OnUpdateNote += UpdateNote;
             MainUserControl.OnOpenFile += OpenFile;
             MainUserControl.OnDataGridRefreshed += LoadNotes;
+            MainUserControl.OnDeleteNote += DeleteNote;
             _session.OnIsAuthenticatedChanged += OnIsAuthenticatedChangedEventHandler;
         }
 
-        private void UpdateNote(UpdateNoteCommand command)
+        private async void DeleteNote(DeleteNoteCommand command)
         {
-            _commandDispatcher.Dispatch(command);
+            await _commandDispatcher.Dispatch(command);
+        }
+
+        private async void UpdateNote(UpdateNoteCommand command)
+        {
+            await _commandDispatcher.Dispatch(command);
         }
 
         private async void LoadNotes(string obj)
@@ -55,6 +59,7 @@ namespace Notely
         {
             var content = await _queryDispatcher.Dispatch<GetNoteContentQuery, string>(query);
             MainUserControl.MainMarkdownEditor.Text = content;
+            MainUserControl.MainMarkdownEditor.Text += " ";
             MainUserControl.MainTabControl.SelectedItem = MainUserControl.EditTabItem;
         }
 
@@ -75,6 +80,7 @@ namespace Notely
                 LoggingControl.Visibility = Visibility.Hidden;
                 MainUserControl.Visibility = Visibility.Visible;
                 SignOutButton.Visibility = Visibility.Visible;
+                UserInfoButton.Visibility = Visibility.Visible;
                 NameLabel.Visibility = Visibility.Visible;
                 NameLabel.Content = String.Format(NameLabel.Content.ToString(), string.IsNullOrWhiteSpace(_session.FullName) ? _session.UserName : _session.FullName);
                 
@@ -85,6 +91,7 @@ namespace Notely
                 LoggingControl.Visibility = Visibility.Visible;
                 MainUserControl.Visibility = Visibility.Hidden;
                 SignOutButton.Visibility = Visibility.Hidden;
+                UserInfoButton.Visibility = Visibility.Hidden;
                 NameLabel.Visibility = Visibility.Hidden;
             }
         }
@@ -92,7 +99,7 @@ namespace Notely
         private async void OnSigningUpEventHandler(RegisterUserCommand command)
         {
             await _commandDispatcher.Dispatch(command);
-            LoggingControl.TabIndex = 0;
+            LoggingControl.SigningTabControl.SelectedItem = LoggingControl.LoginTabItem;
         }
 
         private async void OnSigningInEventHandler((string username, string password) credentials)
@@ -115,6 +122,12 @@ namespace Notely
         private void SignOutButton_Click(object sender, RoutedEventArgs e)
         {
             ClearSession();
+        }
+
+        private void UserInfoButton_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new UserWindow(_commandDispatcher, _queryDispatcher, _session);
+            window.Show();
         }
     }
 }

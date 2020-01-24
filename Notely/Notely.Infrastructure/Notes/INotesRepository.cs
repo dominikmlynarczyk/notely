@@ -11,5 +11,6 @@ namespace Notely.Infrastructure.Notes
         Task SaveNoteFile(string filePath, string content);
         Task<string> GetNoteContent(string filePath);
         Task<IEnumerable<Note>> GetNotesForUser(Guid sessionUserId, string queryName);
+        void DeleteNoteFile(string filePath);
     }
 }

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Notely.Application.Notes.DTOs;
 using Notely.Domain.Notes;
 using Notely.Domain.Notes.DataStructures;
+using Notely.SharedKernel;
 
 namespace Notely.Application.Notes
 {
@@ -13,5 +14,6 @@ namespace Notely.Application.Notes
         Task<string> OpenNoteFile(string contentPath);
         Task<IEnumerable<NoteDto>> GetNotesForUser(string queryName);
         Task UpdateNote(NoteDataStructure dataStructure, string content);   
+        Task DeleteNote(AggregateId id);   
     }
 }

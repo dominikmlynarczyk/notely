@@ -22,18 +22,4 @@ namespace Notely.Application.Users.Handlers
                 command.ConfirmPassword);
         }
     }
-    public class LoginUserCommandHandler : ICommandHandler<LoginUserCommand>
-    {
-        private readonly IUsersService _usersService;
-
-        public LoginUserCommandHandler(IUsersService usersService)
-        {
-            _usersService = usersService;
-        }
-
-        public async Task Handle(LoginUserCommand command)
-        {
-            await _usersService.Login(command.UserName, command.Password);
-        }
-    }
 }

@@ -39,10 +39,14 @@ namespace Notely.Infrastructure.Notes
         public async Task<IEnumerable<Note>> GetNotesForUser(Guid sessionUserId, string queryName)
         {
             var elements = string.IsNullOrWhiteSpace(queryName)
-                ? await Set.Where(x => x.UserId == sessionUserId).ToListAsync()
-                : await Set.Where(x => x.Name.Contains(queryName) && x.UserId == sessionUserId).ToListAsync();
+                ? await Set.Where(x => x.UserId == sessionUserId && !x.IsArchived).ToListAsync()
+                : await Set.Where(x => x.Name.Contains(queryName) && x.UserId == sessionUserId && !x.IsArchived).ToListAsync();
             return Mapper.Map<IEnumerable<Note>>(elements);
         }
-            
+
+        public void DeleteNoteFile(string filePath)
+        {
+            File.Delete(filePath);
+        }
     }
 }

@@ -34,15 +34,17 @@
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="50"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Button Grid.Row="0" Grid.Column="2" Name="OpenButton" HorizontalAlignment="Center" Content="Open file" Height="50" Width="Auto" Click="OpenButton_Click"/>
+                    <Button Grid.Row="0" Grid.Column="2" Name="OpenButton" HorizontalAlignment="Center" Content="Open file" Height="Auto" Width="Auto" Click="OpenButton_Click"/>
+                    <Button Grid.Row="0" Grid.Column="3" Name="NewNoteButton" HorizontalAlignment="Center" Content="New note" Height="Auto" Width="Auto" Click="NewNoteButton_OnClick"/>
                     <Label FontSize="18" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Content="Search by name:"></Label>
                     <TextBox FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="1" TextChanged="NameTextBox_OnTextChanged" Name="NameTextBox"  Grid.Row="0"></TextBox>
-                    <DataGrid CanUserAddRows="False" Grid.Row="1" Grid.ColumnSpan="3" ItemsSource="{Binding}" AlternatingRowBackground="LightBlue" AlternationCount="2" Name="NotesDataGrid" AutoGenerateColumns="false">
+                    <DataGrid CanUserAddRows="False" Grid.Row="1" Grid.ColumnSpan="4" ItemsSource="{Binding}" AlternatingRowBackground="LightBlue" AlternationCount="2" Name="NotesDataGrid" AutoGenerateColumns="false">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Name" Binding="{Binding Name}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Created date" Binding="{Binding CreatedDate}"></DataGridTextColumn>
@@ -51,7 +53,14 @@
                             <DataGridTemplateColumn Header="Action">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Content="Open" Click="ButtonBase_OnClick" Tag="{Binding Id}" />
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            <Button Grid.Column="0" Content="Open" Click="ButtonBase_OnClick" Tag="{Binding Id}" />
+                                            <Button Grid.Column="1" Content="Delete" Click="DeleteButtonBase_OnClick" Tag="{Binding Id}" />
+                                        </Grid>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -61,7 +70,16 @@
             </TabItem>
             <TabItem Name="EditTabItem" TabIndex="1" Header="Edit">
 
-                <Grid>
+                <Grid><Grid.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                    <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </Grid.Resources>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="*"/>

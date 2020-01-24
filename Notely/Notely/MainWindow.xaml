@@ -22,9 +22,15 @@
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <controls:LoggingControl x:Name="LoggingControl" Grid.Row="1"></controls:LoggingControl>
-        <controls:MainUserControl x:Name="MainUserControl" Grid.Row="1" Visibility="Hidden"></controls:MainUserControl>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <controls:LoggingControl Grid.ColumnSpan="3" x:Name="LoggingControl" Grid.Row="1"></controls:LoggingControl>
+        <controls:MainUserControl Grid.ColumnSpan="3" x:Name="MainUserControl" Grid.Row="1" Visibility="Hidden"></controls:MainUserControl>
         <Label Visibility="Hidden" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" Name="NameLabel" Content="Hello, {0}"></Label>
-        <Button Name="SignOutButton" VerticalAlignment="Center"  Grid.Row="0" Visibility="Hidden" Grid.Column="0" Content="Sign out" HorizontalAlignment="Right" Margin="0,30,0,0" Width="Auto" Click="SignOutButton_Click"/>
+        <Button Name="SignOutButton" VerticalAlignment="Center"  Grid.Row="0" Visibility="Hidden" Grid.Column="2" Content="Sign out" Width="Auto" Click="SignOutButton_Click"/>
+        <Button Name="UserInfoButton" VerticalAlignment="Center"  Grid.Row="0" Visibility="Hidden" Grid.Column="1" Content="Info" Width="Auto" Click="UserInfoButton_Click"/>
     </Grid>
 </Window>

@@ -7,21 +7,21 @@ using Notely.SharedKernel.Application.Handlers;
 
 namespace Notely.Application.Notes.Handlers
 {
-    public class CreateNoteCommandHandler : ICommandHandler<CreateNoteCommand>
+    public class UpdateNoteCommandHandler : ICommandHandler<UpdateNoteCommand>
     {
         private readonly INoteService _noteService;
         private readonly ISession _session;
 
-        public CreateNoteCommandHandler(INoteService noteService, ISession session)
+        public UpdateNoteCommandHandler(INoteService noteService, ISession session)
         {
             _noteService = noteService;
             _session = session;
         }
 
-        public async Task Handle(CreateNoteCommand command)
+        public async Task Handle(UpdateNoteCommand command)
         {
             var dataStructure = new NoteDataStructure(command.Id, command.Name, command.ContentPath, new AggregateId(_session.UserId.Value));
-            await _noteService.AddNote(dataStructure, command.Content);
+            await _noteService.UpdateNote(dataStructure, command.Content);
         }
     }
 }
