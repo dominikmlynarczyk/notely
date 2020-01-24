@@ -2,7 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:p="clr-namespace:Notely.Properties"
              xmlns:local="clr-namespace:Notely.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -18,7 +19,7 @@
             </ResourceDictionary>
         </Grid.Resources>
         <TabControl Name="SigningTabControl">
-            <TabItem Name="LoginTabItem" Padding="10,10,10,10" Header="Login">
+            <TabItem Name="LoginTabItem" Padding="10,10,10,10" Header="{x:Static p:Resources.SignIn}">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -32,13 +33,13 @@
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
                     <TextBox Name="LoginUserNameTextBox" Grid.Column="1" Grid.Row="1" VerticalContentAlignment="Center" FontSize="18" />
-                    <Label VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="1" Content="User name:" FontSize="18"></Label>
+                    <Label VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="1" Content="{x:Static p:Resources.UserName}" FontSize="18"></Label>
                     <PasswordBox Name="LoginPasswordTextBox"  Grid.Column="1" Grid.Row="2" FontSize="18" VerticalContentAlignment="Center" />
-                    <Label VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="2" Content="Password:" FontSize="18"></Label>
-                    <Button Name="LoginButton" Grid.Column="1" Grid.Row="3" Content="Sign in" FontSize="18" Click="Button_Click"></Button>
+                    <Label VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="2" Content="{x:Static p:Resources.Password}" FontSize="18"></Label>
+                    <Button Name="LoginButton" Grid.Column="1" Grid.Row="3" Content="{x:Static p:Resources.SignIn}" FontSize="18" Click="Button_Click"></Button>
                 </Grid>
             </TabItem>
-            <TabItem Name="RegisterTabItem"  Header="Register">
+            <TabItem Name="RegisterTabItem"  Header="{x:Static p:Resources.SignUp}">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width=".5*"></ColumnDefinition>
@@ -56,18 +57,18 @@
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
                     <TextBox Name="RegisterUserNameTextBox" Grid.Column="1" Grid.Row="1" VerticalContentAlignment="Center" FontSize="18" />
-                    <Label VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="1" Content="User name:" FontSize="18"></Label>
+                    <Label VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="1" Content="{x:Static p:Resources.UserName}" FontSize="18"></Label>
                     <PasswordBox Name="RegisterPasswordTextBox"  Grid.Column="1" Grid.Row="2" FontSize="18" VerticalContentAlignment="Center" />
-                    <Label VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="2" Content="Password:" FontSize="18"></Label>
+                    <Label VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="2" Content="{x:Static p:Resources.Password}" FontSize="18"></Label>
                     <PasswordBox Name="RegisterConfirmPasswordTextBox"  Grid.Column="1" Grid.Row="3" FontSize="18" VerticalContentAlignment="Center" />
-                    <Label VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="3" Content="Confirm password:" FontSize="18"></Label>
+                    <Label VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="3" Content="{x:Static p:Resources.ConfirmPassword}" FontSize="18"></Label>
                     <TextBox Name="RegisterFirstNameTextBox" Grid.Column="1" Grid.Row="4" VerticalContentAlignment="Center" FontSize="18" />
-                    <Label VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="4" Content="First name:" FontSize="18"></Label>
+                    <Label VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="4" Content="{x:Static p:Resources.FirstName}" FontSize="18"></Label>
                     <TextBox Name="RegisterSecondNameTextBox" Grid.Column="1" Grid.Row="5" VerticalContentAlignment="Center" FontSize="18" />
-                    <Label VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="5" Content="Second name:" FontSize="18"></Label>
+                    <Label VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="5" Content="{x:Static p:Resources.SecondName}" FontSize="18"></Label>
                     <TextBox Name="RegisterEmailTextBox" Grid.Column="1" Grid.Row="6" VerticalContentAlignment="Center" FontSize="18" />
-                    <Label VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="6" Content="Email:" FontSize="18"></Label>
-                    <Button Name="RegisterButton"  Grid.Column="1" Grid.Row="7" Content="Sign up" FontSize="18" Click="RegisterButton_OnClickButton_Click"></Button>
+                    <Label VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="6" Content="{x:Static p:Resources.Email}" FontSize="18"></Label>
+                    <Button Name="RegisterButton"  Grid.Column="1" Grid.Row="7" Content="{x:Static p:Resources.SignUp}" FontSize="18" Click="RegisterButton_OnClickButton_Click"></Button>
                 </Grid>
             </TabItem>
         </TabControl>

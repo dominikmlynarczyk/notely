@@ -61,7 +61,7 @@ namespace Notely.UserControls
                 }
                 else
                 {
-                    MessageBox.Show("You have to set filename");
+                    MessageBox.Show(Notely.Properties.Resources.FilePathNotSet);
                 }
                 var command = new CreateNoteCommand(EditNameTextBox.Text, fileName, MainMarkdownEditor.Text);
                 OnSaveNote?.Invoke(command);
@@ -73,7 +73,7 @@ namespace Notely.UserControls
                 OnUpdateNote?.Invoke(command);
                 SetNoteInfo(command.Id, fileName);
             }
-            MessageBox.Show("Note saved successfully", "Success", MessageBoxButton.OK);
+            MessageBox.Show(Notely.Properties.Resources.SavedSuccessfully, Notely.Properties.Resources.Success, MessageBoxButton.OK);
             OnDataGridRefreshed?.Invoke(NameTextBox.Text);
         }
 
@@ -93,7 +93,7 @@ namespace Notely.UserControls
             }
             else
             {
-                MessageBox.Show("You have to choose file");
+                MessageBox.Show(Notely.Properties.Resources.FileNotSet);
             }
         }
 
@@ -110,7 +110,7 @@ namespace Notely.UserControls
             var note = Notes.SingleOrDefault(x => x.Id == new Guid(noteId));
             if (note == null)
             {
-                throw new BusinessLogicException("Note not found");
+                throw new BusinessLogicException(Notely.Properties.Resources.NoteNotFoundMessage);
             }
             OnOpenFile?.Invoke(new GetNoteContentQuery(note.ContentPath));
             _notePath = note.ContentPath;
@@ -136,7 +136,7 @@ namespace Notely.UserControls
             var note = Notes.SingleOrDefault(x => x.Id == new Guid(noteId));
             if (note == null)
             {
-                throw new BusinessLogicException("Note not found");
+                throw new BusinessLogicException(Notely.Properties.Resources.FileNotSet);
             }
             OnDeleteNote?.Invoke(new DeleteNoteCommand(new AggregateId(note.Id)));
             OnDataGridRefreshed?.Invoke(NameTextBox.Text);

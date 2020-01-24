@@ -118,111 +118,111 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Action" xml:space="preserve">
-    <value>Action</value>
+    <value>Akcja</value>
   </data>
   <data name="BaseErrorMessage" xml:space="preserve">
-    <value>Something went wrong</value>
+    <value>Coś poszło nie tak</value>
   </data>
   <data name="ChangePassword" xml:space="preserve">
-    <value>Change password</value>
+    <value>Zmień hasło</value>
   </data>
   <data name="ConfirmPassword" xml:space="preserve">
-    <value>Confirm password</value>
+    <value>Potwierdź hasło</value>
   </data>
   <data name="CreatedDate" xml:space="preserve">
-    <value>Created date</value>
+    <value>Data utworzenia</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
+    <value>Usuń</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>Edit</value>
+    <value>Edycja</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
   <data name="ErrorCaptionMessage" xml:space="preserve">
-    <value>An error occured</value>
+    <value>Wystąpił błąd</value>
   </data>
   <data name="FileNotSet" xml:space="preserve">
-    <value>You have to choose file!</value>
+    <value>Musisz wybrać plik</value>
   </data>
   <data name="FilePath" xml:space="preserve">
-    <value>File path</value>
+    <value>Ścieżka</value>
   </data>
   <data name="FilePathNotSet" xml:space="preserve">
-    <value>You have to set file name!</value>
+    <value>Musisz wybrać nazwę pliku</value>
   </data>
   <data name="FirstName" xml:space="preserve">
-    <value>First name</value>
+    <value>Imię</value>
   </data>
   <data name="InvalidCredentialMessage" xml:space="preserve">
-    <value>Invalid credentials</value>
+    <value>Złe dane logowania</value>
   </data>
   <data name="ModifiedDate" xml:space="preserve">
-    <value>Modified date</value>
+    <value>Data modyfikacji</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>Name</value>
+    <value>Nazwa</value>
   </data>
   <data name="NewNote" xml:space="preserve">
-    <value>New note</value>
+    <value>Nowa notatka</value>
   </data>
   <data name="NewPassword" xml:space="preserve">
-    <value>New password</value>
+    <value>Nowe hasło</value>
   </data>
   <data name="NoteExistsMessage" xml:space="preserve">
-    <value>Note already exist</value>
+    <value>Notatka istnieje</value>
   </data>
   <data name="NoteNotFoundMessage" xml:space="preserve">
-    <value>Note not found</value>
+    <value>Notatka nie została odnaleziona</value>
   </data>
   <data name="OldPassword" xml:space="preserve">
-    <value>Old password</value>
+    <value>Stare hasło</value>
   </data>
   <data name="Open" xml:space="preserve">
-    <value>Open file</value>
+    <value>Otwórz plik</value>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Password</value>
+    <value>Hasło</value>
   </data>
   <data name="PasswordNotMatchRequirementsMessage" xml:space="preserve">
-    <value>Password does not match requirments</value>
+    <value>Hasło nie spełnia wymagań</value>
   </data>
   <data name="PasswordsNotMatchMessage" xml:space="preserve">
-    <value>Passwords are not same</value>
+    <value>Hasła do siebie nie pasują</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>Zapisz</value>
   </data>
   <data name="SavedSuccessfully" xml:space="preserve">
-    <value>Saved successfully</value>
+    <value>Zapisano</value>
   </data>
   <data name="SearchByName" xml:space="preserve">
-    <value>Search by name</value>
+    <value>Szukaj po nazwie</value>
   </data>
   <data name="SecondName" xml:space="preserve">
-    <value>Second name</value>
+    <value>Nazwisko</value>
   </data>
   <data name="SignIn" xml:space="preserve">
-    <value>Sign in</value>
+    <value>Zaloguj</value>
   </data>
   <data name="SignOut" xml:space="preserve">
-    <value>Sign out</value>
+    <value>Wyloguj</value>
   </data>
   <data name="SignUp" xml:space="preserve">
-    <value>Sign up</value>
+    <value>Zarejestruj</value>
   </data>
   <data name="Success" xml:space="preserve">
-    <value>Success</value>
+    <value>Sukces</value>
   </data>
   <data name="UserExistsMessage" xml:space="preserve">
-    <value>User already exist</value>
+    <value>Użytkownik istnieje</value>
   </data>
   <data name="UserName" xml:space="preserve">
-    <value>User name</value>
+    <value>Nazwa użytkownika</value>
   </data>
   <data name="UserNotFoundMessage" xml:space="preserve">
-    <value>User not found</value>
+    <value>Użykownik nie został znaleziony</value>
   </data>
 </root>

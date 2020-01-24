@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Notely"
         xmlns:controls="clr-namespace:Notely.UserControls"
+        xmlns:p="clr-namespace:Notely.Properties"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1024" Loaded="Window_Loaded">
+        Title="Notely" Height="800" Width="1024" Loaded="Window_Loaded">
     <Grid Name="MainGrid">
         <Grid.Resources>
             <ResourceDictionary>
@@ -30,7 +31,7 @@
         <controls:LoggingControl Grid.ColumnSpan="3" x:Name="LoggingControl" Grid.Row="1"></controls:LoggingControl>
         <controls:MainUserControl Grid.ColumnSpan="3" x:Name="MainUserControl" Grid.Row="1" Visibility="Hidden"></controls:MainUserControl>
         <Label Visibility="Hidden" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left" Name="NameLabel" Content="Hello, {0}"></Label>
-        <Button Name="SignOutButton" VerticalAlignment="Center"  Grid.Row="0" Visibility="Hidden" Grid.Column="2" Content="Sign out" Width="Auto" Click="SignOutButton_Click"/>
+        <Button Name="SignOutButton" VerticalAlignment="Center"  Grid.Row="0" Visibility="Hidden" Grid.Column="2" Content="{x:Static p:Resources.SignOut}" Width="Auto" Click="SignOutButton_Click"/>
         <Button Name="UserInfoButton" VerticalAlignment="Center"  Grid.Row="0" Visibility="Hidden" Grid.Column="1" Content="Info" Width="Auto" Click="UserInfoButton_Click"/>
     </Grid>
 </Window>

@@ -15,6 +15,7 @@ using Notely.Application.Users.Commands;
 using Notely.Application.Users.DTOs;
 using Notely.Application.Users.Queries;
 using Notely.Infrastructure;
+using Notely.SharedKernel;
 using Notely.SharedKernel.Application.Handlers;
 
 namespace Notely.Windows
@@ -77,6 +78,29 @@ namespace Notely.Windows
                 EmailTextBox.Text);
             _commandDispatcher.Dispatch(command);
             SetTextBoxesReadOnly(true);
+            MessageBox.Show(Notely.Properties.Resources.SavedSuccessfully, Notely.Properties.Resources.Success);
+        }
+
+        private async void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            var command = new DeleteUserCommand(new AggregateId(SelectedUserDto.Id));
+            await _commandDispatcher.Dispatch(command);
+            ClearSession();
+        }
+
+        private void ClearSession()
+        {
+            _session.UserName = null;
+            _session.FullName = null;
+            _session.UserId = null;
+            this.Close();
+        }
+
+        private void ChangePasswordButton_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new ChangePasswordWindow(_session, _commandDispatcher);
+            window.Show();
+            // ClearSession();
         }
     }
 }

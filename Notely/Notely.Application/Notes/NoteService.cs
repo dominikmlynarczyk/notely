@@ -31,7 +31,7 @@ namespace Notely.Application.Notes
             var note = await _notesRepository.Get(x => x.Id == dataStructure.Id.Id);
             if (note != null)
             {
-                throw new BusinessLogicException("Note already exists");
+                throw new BusinessLogicException("NoteExistsMessage");
             }
 
             note = _noteDomainFactory.Create(dataStructure);
@@ -80,7 +80,7 @@ namespace Notely.Application.Notes
             var note = _notesRepository.Get(x => x.Id == id.Id && !x.IsArchived);
             if (note == null)
             {
-                throw new BusinessLogicException("Note not found");
+                throw new BusinessLogicException("NoteNotFoundMessage");
             }
 
             return note;

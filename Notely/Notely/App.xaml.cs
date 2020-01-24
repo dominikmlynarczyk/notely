@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Configuration;
+using System.Resources;
 using System.Windows;
 using Autofac;
 using Microsoft.EntityFrameworkCore;
 using Notely.Infrastructure;
+using Notely.SharedKernel.Exceptions;
 
 namespace Notely
 {
@@ -12,6 +14,11 @@ namespace Notely
     /// </summary>
     public partial class App : System.Windows.Application
     {
+        public App()
+        {
+            System.Threading.Thread.CurrentThread.CurrentUICulture =
+                new System.Globalization.CultureInfo(ConfigurationManager.AppSettings["lang"]);
+        }
         protected override void OnStartup(StartupEventArgs e)
         {
             var builder = new ContainerBuilder();
@@ -43,7 +50,16 @@ namespace Notely
 
         private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
-            MessageBox.Show(e.Exception.Message, "An error occured", MessageBoxButton.OK, MessageBoxImage.Error);
+            if (e.Exception is BusinessLogicException)
+            {
+                var resourceManager = new ResourceManager(new Notely.Properties.Resources().GetType());
+                MessageBox.Show(resourceManager.GetString(e.Exception.Message), Notely.Properties.Resources.ErrorCaptionMessage, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                MessageBox.Show(Notely.Properties.Resources.BaseErrorMessage, Notely.Properties.Resources.ErrorCaptionMessage, MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            }
             e.Handled = true;
         }
     }

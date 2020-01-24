@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Notely.Domain.Users;
 using Notely.Domain.Users.DataStructures;
 using Notely.Domain.Users.Factories;
@@ -30,13 +31,13 @@ namespace Notely.Application.Users
             var user = await _usersRepository.Get(x => x.UserName == dataStructure.UserName);
             if (user != null)
             {
-                throw new BusinessLogicException("User already exists");
+                throw new BusinessLogicException("UserExistsMessage");
             }
             user = _userFactory.Create(dataStructure);
             CheckPasswords(password, confirmPassword);
             user.SetPassword(password, _passwordPolicyFactory.Create<FourLettersPasswordPolicy>());
 
-            _usersRepository.Add(user);
+            await _usersRepository.Add(user);
             return user;
         }
 
@@ -45,12 +46,12 @@ namespace Notely.Application.Users
             var user = await _usersRepository.Get(x => x.UserName == userName && !x.IsArchived);
             if (user == null)
             {
-                throw new BusinessLogicException("Incorrect credentials");
+                throw new BusinessLogicException("InvalidCredentialMessage");
             }
 
             if (!user.IsPasswordValid(password))
             {
-                throw new BusinessLogicException("Incorrect credentials");
+                throw new BusinessLogicException("InvalidCredentialMessage");
             }
 
             _session.UserId = user.Id.Id;
@@ -73,12 +74,26 @@ namespace Notely.Application.Users
             await _usersRepository.Update(user);
         }
 
+        public async Task ChangePassword(AggregateId userId, string oldPassword, string newPassword,
+            string confirmPassword)
+        {
+            var user = await GetUserOrThrow(userId);
+            if (!user.IsPasswordValid(oldPassword))
+            {
+                throw new BusinessLogicException("InvalidCredentialMessage");
+            }
+
+            CheckPasswords(newPassword, confirmPassword);
+            user.SetPassword(newPassword, _passwordPolicyFactory.Create<FourLettersPasswordPolicy>());
+            await _usersRepository.Update(user);
+        }
+
         private async Task<User> GetUserOrThrow(AggregateId id)
         {
             var user = await _usersRepository.Get(x => x.Id == id.Id && !x.IsArchived);
             if (user == null)
             {
-                throw new BusinessLogicException("User not found");
+                throw new BusinessLogicException("UserNotFoundMessage");
             }
 
             return user;
@@ -86,9 +101,11 @@ namespace Notely.Application.Users
 
         private void CheckPasswords(string password, string confirmPassword)
         {
-            if (password != confirmPassword)
+            if (password == null) throw new ArgumentNullException(nameof(password));
+            if (confirmPassword == null) throw new ArgumentNullException(nameof(confirmPassword));
+            if (!password.Equals(confirmPassword))
             {
-                throw new BusinessLogicException("Passwords are not same");
+                throw new BusinessLogicException("PasswordsNotMatchMessage");
             }
         }
     }

@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Notely.Windows"
+        xmlns:p="clr-namespace:Notely.Properties"
         mc:Ignorable="d"
-        Title="UserWindow" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="Notely" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
         <Grid.Resources>
             <ResourceDictionary>
@@ -31,17 +32,17 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" Content="User name:" FontSize="18" VerticalAlignment="Center"></Label>
-        <Label Grid.Row="1" Grid.Column="0" Content="First name:" FontSize="18" VerticalAlignment="Center"></Label>
-        <Label Grid.Row="2" Grid.Column="0" Content="Second name:" FontSize="18" VerticalAlignment="Center"></Label>
-        <Label Grid.Row="3" Grid.Column="0" Content="Email:" FontSize="18" VerticalAlignment="Center"></Label>
+        <Label Grid.Row="0" Grid.Column="0" Content="{x:Static p:Resources.UserName}" FontSize="18" VerticalAlignment="Center"></Label>
+        <Label Grid.Row="1" Grid.Column="0" Content="{x:Static p:Resources.FirstName}" FontSize="18" VerticalAlignment="Center"></Label>
+        <Label Grid.Row="2" Grid.Column="0" Content="{x:Static p:Resources.SecondName}" FontSize="18" VerticalAlignment="Center"></Label>
+        <Label Grid.Row="3" Grid.Column="0" Content="{x:Static p:Resources.Email}" FontSize="18" VerticalAlignment="Center"></Label>
         <TextBox Name="UserNameTextBox" IsReadOnly="True" Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="1" FontSize="18" VerticalAlignment="Center" Height="Auto"></TextBox>
         <TextBox Name="FirstNameTextBox" IsReadOnly="True" Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="1" FontSize="18" VerticalAlignment="Center" Height="Auto"></TextBox>
         <TextBox Name="SecondNameTextBox" IsReadOnly="True" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="1" FontSize="18" VerticalAlignment="Center" Height="Auto"></TextBox>
         <TextBox Name="EmailTextBox" IsReadOnly="True" Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="1" FontSize="18" VerticalAlignment="Center" Height="Auto"></TextBox>
-        <Button Name="EditButton" Grid.Row="4" Grid.Column="2" Content="Edit" Click="EditButton_Click"></Button>
-        <Button Name="SaveButton" Grid.Row="4" Grid.Column="2" Content="Save" Click="SaveButton_OnClick" Visibility="Hidden"></Button>
-        <Button Name="ChangePasswordButton" Grid.Row="5" Grid.Column="2" Content="Change password"></Button>
-        <Button Name="DeleteButton" Grid.Row="6" Grid.Column="2" Content="Delete"></Button>
+        <Button Name="EditButton" Grid.Row="4" Grid.Column="2" Content="{x:Static p:Resources.Edit}" Click="EditButton_Click"></Button>
+        <Button Name="SaveButton" Grid.Row="4" Grid.Column="2" Content="{x:Static p:Resources.Save}" Click="SaveButton_OnClick" Visibility="Hidden"></Button>
+        <Button Name="ChangePasswordButton" Grid.Row="5" Grid.Column="2" Content="{x:Static p:Resources.ChangePassword}" Click="ChangePasswordButton_Click"></Button>
+        <Button Name="DeleteButton" Grid.Row="6" Grid.Column="2" Content="{x:Static p:Resources.Delete}" Click="DeleteButton_Click"></Button>
     </Grid>
 </Window>

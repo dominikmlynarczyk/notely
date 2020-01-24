@@ -21,4 +21,14 @@ namespace Notely.Application.Users.Commands
             Email = email;
         }
     }
+
+    public class DeleteUserCommand : ICommand
+    {
+        public AggregateId Id { get; }
+
+        public DeleteUserCommand(AggregateId id)
+        {
+            Id = id;
+        }
+    }
 }

@@ -14,5 +14,8 @@ namespace Notely.Application.Users
         Task<User> GetUser(AggregateId userId);
         Task UpdateUser(CreateUserDataStructure dataStructure);
         Task DeleteUser(AggregateId id);
+
+        Task ChangePassword(AggregateId userId, string oldPassword, string newPassword,
+            string confirmPassword);
     }
 }
