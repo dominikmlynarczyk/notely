@@ -470,10 +470,8 @@
     <Resource Include="Resources\notely-logo.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\background.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\background-register.jpg" />
+    <Resource Include="Resources\bg-login.jpg" />
+    <Resource Include="Resources\bg-register.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
