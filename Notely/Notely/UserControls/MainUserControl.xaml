@@ -51,7 +51,7 @@
                             <DataGridTextColumn Header="{x:Static p:Resources.CreatedDate}" Binding="{Binding CreatedDate}"></DataGridTextColumn>
                             <DataGridTextColumn Header="{x:Static p:Resources.ModifiedDate}" Binding="{Binding ModifiedDate}"></DataGridTextColumn>
                             <DataGridTextColumn Header="{x:Static p:Resources.FilePath}" Binding="{Binding ContentPath}"></DataGridTextColumn>
-                            <DataGridTemplateColumn Header="Action">
+                            <DataGridTemplateColumn Header="{x:Static p:Resources.Action}">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Grid>

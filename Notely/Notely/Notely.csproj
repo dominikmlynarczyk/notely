@@ -466,6 +466,15 @@
     <Folder Include="ViewModel\" />
     <Folder Include="View\" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\notely-logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\test-bg.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\test-bg2.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -7,7 +7,7 @@
         xmlns:controls="clr-namespace:Notely.UserControls"
         xmlns:p="clr-namespace:Notely.Properties"
         mc:Ignorable="d"
-        Title="Notely" Height="800" Width="1024" Loaded="Window_Loaded">
+        Title="Notely" Height="800" Width="1024" Loaded="Window_Loaded" ResizeMode="CanResize" Topmost="False" WindowState="Normal" Icon="./Resources/notely-logo.ico">
     <Grid Name="MainGrid">
         <Grid.Resources>
             <ResourceDictionary>
