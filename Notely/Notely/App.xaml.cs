@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.IO;
 using System.Resources;
 using System.Windows;
 using Autofac;
@@ -54,13 +55,15 @@ namespace Notely
             {
                 var resourceManager = new ResourceManager(new Notely.Properties.Resources().GetType());
                 MessageBox.Show(resourceManager.GetString(e.Exception.Message), Notely.Properties.Resources.ErrorCaptionMessage, MessageBoxButton.OK, MessageBoxImage.Error);
+                e.Handled = true;
             }
             else
             {
                 MessageBox.Show(Notely.Properties.Resources.BaseErrorMessage, Notely.Properties.Resources.ErrorCaptionMessage, MessageBoxButton.OK,
                     MessageBoxImage.Error);
+                File.WriteAllText("./log.txt", e.Exception.Message + e.Exception.ToString());
+                e.Handled = false;
             }
-            e.Handled = true;
         }
     }
 }
