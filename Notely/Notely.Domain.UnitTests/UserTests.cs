@@ -70,5 +70,52 @@ namespace Notely.Domain.UnitTests
 
             Assert.ThrowsException<BusinessLogicException>(() => user.SetPassword("123", new FourLettersPasswordPolicy()));
         }
+
+        [TestMethod]
+        public void Should_Not_Update_User_After_Empty_UserName_Change()
+        {
+            var user = new User(new AggregateId(Guid.NewGuid()), "xxx", "xxx", "xxx", "xxx@xxx.com");
+            Assert.ThrowsException<ArgumentNullException>(() => user.Update(String.Empty, user.FirstName, user.SecondName, user.Email));
+        }
+
+        [TestMethod]
+        public void Should_Not_Update_User_After_Empty_FirstName_Change()
+        {
+            var user = new User(new AggregateId(Guid.NewGuid()), "xxx", "xxx", "xxx", "xxx@xxx.com");
+            Assert.ThrowsException<ArgumentNullException>(() => user.Update(user.UserName, String.Empty, user.SecondName, user.Email));
+        }
+
+        [TestMethod]
+        public void Should_Not_Update_User_After_Empty_SecondName_Change()
+        {
+            var user = new User(new AggregateId(Guid.NewGuid()), "xxx", "xxx", "xxx", "xxx@xxx.com");
+            Assert.ThrowsException<ArgumentNullException>(() => user.Update(user.UserName, user.FirstName, String.Empty, user.Email));
+        }
+
+        [TestMethod]
+        public void Should_Not_Update_User_After_Empty_Email_Change()
+        {
+            var user = new User(new AggregateId(Guid.NewGuid()), "xxx", "xxx", "xxx", "xxx@xxx.com");
+            Assert.ThrowsException<ArgumentNullException>(() => user.Update(user.UserName, user.FirstName, user.SecondName, String.Empty));
+        }
+
+        [TestMethod]
+        public void Should_Update_User()
+        {
+            var user = new User(new AggregateId(Guid.NewGuid()), "xxx", "xxx", "xxx", "xxx@xxx.com");
+            user.Update("newTest", "testName", "testSecName", "testmail@mail.com");
+            Assert.AreEqual(user.UserName, "newTest");
+            Assert.AreEqual(user.FirstName, "testName");
+            Assert.AreEqual(user.SecondName, "testSecName");
+            Assert.AreEqual(user.Email, "testmail@mail.com");
+        }
+
+        [TestMethod]
+        public void Should_Archive_User()
+        {
+            var user = new User(new AggregateId(Guid.NewGuid()), "xxx", "xxx", "xxx", "xxx@xxx.com");
+            user.Archive();
+            Assert.IsTrue(user.IsArchived);
+        }
     }
 }
