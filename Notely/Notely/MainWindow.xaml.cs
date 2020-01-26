@@ -66,12 +66,8 @@ namespace Notely
 
         private void SaveNote(CreateNoteCommand command)
         {
-            if (!_noteId.HasValue)
-            {
-
-                _commandDispatcher.Dispatch(command);
+            _commandDispatcher.Dispatch(command);
                 _noteId = command.Id;
-            }
         }
 
         private void OnIsAuthenticatedChangedEventHandler(bool isAuthenticated)
@@ -94,6 +90,7 @@ namespace Notely
                 SignOutButton.Visibility = Visibility.Hidden;
                 UserInfoButton.Visibility = Visibility.Hidden;
                 NameLabel.Visibility = Visibility.Hidden;
+                NameLabel.Content = "Hello, {0}";
             }
         }
 
