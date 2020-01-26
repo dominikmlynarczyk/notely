@@ -22,7 +22,7 @@
             <TabItem Name="LoginTabItem" Padding="10,10,10,10" Header="{x:Static p:Resources.SignIn}">
                 <Grid>
                     <Grid.Background>
-                        <ImageBrush ImageSource="../Resources/test-bg2.jpg" Stretch="Fill"/>
+                        <ImageBrush ImageSource="../Resources/bg-login.jpg" Stretch="Fill"/>
                     </Grid.Background>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
@@ -34,10 +34,12 @@
                         <RowDefinition Height="*"></RowDefinition>
                         <RowDefinition Height=".3*"></RowDefinition>
                         <RowDefinition Height=".3*"></RowDefinition>
-                        <RowDefinition Height=".4*"></RowDefinition>
+                        <RowDefinition Height=".1*"></RowDefinition>
+                        <RowDefinition Height=".1*"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Border Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Column="1" Opacity=".2">
+                    <Border Grid.Row="1" Grid.RowSpan="3" Grid.ColumnSpan="2" Grid.Column="1" Opacity=".5" CornerRadius="15">
                         <Border.Background>
                             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                 <GradientStop Color="White" Offset="1" />
@@ -48,11 +50,14 @@
                     <Label VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1" Content="{x:Static p:Resources.UserName}" FontSize="18" FontWeight="Bold"></Label>
                     <PasswordBox Name="LoginPasswordTextBox"  Grid.Column="2" Grid.Row="2" FontSize="18" VerticalContentAlignment="Center" Margin="0, 0, 30, 0" />
                     <Label HorizontalAlignment="Center" Grid.Column="1" Grid.Row="2" Content="{x:Static p:Resources.Password}" FontSize="18" VerticalAlignment="Center" FontWeight="Bold"/>
-                    <Button Name="LoginButton" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3"  Content="{x:Static p:Resources.SignIn}" FontSize="18" Click="Button_Click"></Button>
+                    <Button Name="LoginButton" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="5"  Content="{x:Static p:Resources.SignIn}" FontSize="18" Click="Button_Click" Background="#77DD77" BorderThickness="0" Margin="50,0"></Button>
                 </Grid>
             </TabItem>
-            <TabItem Name="RegisterTabItem"  Header="{x:Static p:Resources.SignUp}">
-                <Grid Background="#FFE5E5E5">
+            <TabItem Name="RegisterTabItem" Header="{x:Static p:Resources.SignUp}">
+                <Grid>
+                    <Grid.Background>
+                        <ImageBrush ImageSource="../Resources/bg-register.jpg" Stretch="Fill"/>
+                    </Grid.Background>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -67,23 +72,31 @@
                         <RowDefinition Height=".5*"></RowDefinition>
                         <RowDefinition Height=".5*"></RowDefinition>
                         <RowDefinition Height=".5*"></RowDefinition>
-                        <RowDefinition Height=".5*"></RowDefinition>
+                        <RowDefinition Height=".2*"></RowDefinition>
+                        <RowDefinition Height=".2*"></RowDefinition>
                         <RowDefinition Height=".5*"></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <TextBox Name="RegisterUserNameTextBox" Grid.Column="2" Grid.Row="1" VerticalContentAlignment="Center" FontSize="18" />
-                    <Label VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="1" Content="{x:Static p:Resources.UserName}" FontSize="18"></Label>
-                    <PasswordBox Name="RegisterPasswordTextBox"  Grid.Column="2" Grid.Row="2" FontSize="18" VerticalContentAlignment="Center" />
-                    <Label VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="2" Content="{x:Static p:Resources.Password}" FontSize="18"></Label>
-                    <PasswordBox Name="RegisterConfirmPasswordTextBox"  Grid.Column="2" Grid.Row="3" FontSize="18" VerticalContentAlignment="Center" />
-                    <Label VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="3" Content="{x:Static p:Resources.ConfirmPassword}" FontSize="18"></Label>
-                    <TextBox Name="RegisterFirstNameTextBox" Grid.Column="2" Grid.Row="4" VerticalContentAlignment="Center" FontSize="18" />
-                    <Label VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="4" Content="{x:Static p:Resources.FirstName}" FontSize="18"></Label>
-                    <TextBox Name="RegisterSecondNameTextBox" Grid.Column="2" Grid.Row="5" VerticalContentAlignment="Center" FontSize="18" />
-                    <Label VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="5" Content="{x:Static p:Resources.SecondName}" FontSize="18"></Label>
-                    <TextBox Name="RegisterEmailTextBox" Grid.Column="2" Grid.Row="6" VerticalContentAlignment="Center" FontSize="18" />
-                    <Label VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="6" Content="{x:Static p:Resources.Email}" FontSize="18"></Label>
-                    <Button Name="RegisterButton"  Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="8" Content="{x:Static p:Resources.SignUp}" FontSize="18" Click="RegisterButton_OnClickButton_Click"></Button>
+                    <Border Grid.Row="1" Grid.RowSpan="7" Grid.ColumnSpan="2" Grid.Column="1" Opacity=".7" CornerRadius="15">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="White" Offset="1" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+                    <TextBox Name="RegisterUserNameTextBox" Grid.Column="2" Grid.Row="1" VerticalContentAlignment="Center" FontSize="18" Margin="0, 0, 30, 0" />
+                    <Label VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1" Content="{x:Static p:Resources.UserName}" FontSize="18" FontWeight="Bold"></Label>
+                    <PasswordBox Name="RegisterPasswordTextBox"  Grid.Column="2" Grid.Row="2" FontSize="18" VerticalContentAlignment="Center" Margin="0, 0, 30, 0" />
+                    <Label VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="2" Content="{x:Static p:Resources.Password}" FontSize="18" FontWeight="Bold"></Label>
+                    <PasswordBox Name="RegisterConfirmPasswordTextBox"  Grid.Column="2" Grid.Row="3" FontSize="18" VerticalContentAlignment="Center" Margin="0, 0, 30, 0" />
+                    <Label VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="3" Content="{x:Static p:Resources.ConfirmPassword}" FontSize="18" FontWeight="Bold"></Label>
+                    <TextBox Name="RegisterFirstNameTextBox" Grid.Column="2" Grid.Row="4" VerticalContentAlignment="Center" FontSize="18" Margin="0, 0, 30, 0" />
+                    <Label VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="4" Content="{x:Static p:Resources.FirstName}" FontSize="18" FontWeight="Bold"></Label>
+                    <TextBox Name="RegisterSecondNameTextBox" Grid.Column="2" Grid.Row="5" VerticalContentAlignment="Center" FontSize="18" Margin="0, 0, 30, 0" />
+                    <Label VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="5" Content="{x:Static p:Resources.SecondName}" FontSize="18" FontWeight="Bold" Margin="38.8,0,38.6,0.8"></Label>
+                    <TextBox Name="RegisterEmailTextBox" Grid.Column="2" Grid.Row="6" VerticalContentAlignment="Center" FontSize="18" Margin="0, 0, 30, 0" />
+                    <Label VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="6" Content="{x:Static p:Resources.Email}" FontSize="18" FontWeight="Bold"></Label>
+                    <Button Name="RegisterButton"  Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="9" Content="{x:Static p:Resources.SignUp}" FontSize="18" Click="RegisterButton_OnClickButton_Click" Margin="50,0"></Button>
                 </Grid>
             </TabItem>
         </TabControl>

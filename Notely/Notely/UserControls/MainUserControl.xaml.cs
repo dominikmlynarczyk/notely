@@ -85,6 +85,7 @@ namespace Notely.UserControls
 
         private void OpenButton_Click(object sender, RoutedEventArgs e)
         {
+            SetNewFile();
             var dialog = new OpenFileDialog { DefaultExt = "md", Filter = "Md file (*.md)|*.md"};
             if (dialog.ShowDialog() == true)
             {
@@ -144,12 +145,17 @@ namespace Notely.UserControls
 
         private void NewNoteButton_OnClick(object sender, RoutedEventArgs e)
         {
+            SetNewFile();
+        }
+
+        private void SetNewFile()
+        {
             MainMarkdownEditor.Text = string.Empty;
             MainMarkdownEditor.Text += " ";
             _noteId = null;
             _notePath = null;
             EditNameTextBox.Text = string.Empty;
-            MainTabControl.SelectedItem = EditTabItem;
+            MainTabControl.SelectedItem = EditTabItem; ;
         }
     }
 }
