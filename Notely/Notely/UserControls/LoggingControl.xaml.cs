@@ -31,5 +31,10 @@ namespace Notely.UserControls
 
             OnSigningUpEvent?.Invoke(command);
         }
+
+        private void SigningTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

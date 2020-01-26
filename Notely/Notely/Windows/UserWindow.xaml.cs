@@ -65,10 +65,10 @@ namespace Notely.Windows
 
         private void SetTextBoxesReadOnly(bool isReadOnly)
         {
-            UserNameTextBox.IsReadOnly = isReadOnly;
-            FirstNameTextBox.IsReadOnly = isReadOnly;
-            SecondNameTextBox.IsReadOnly = isReadOnly;
-            EmailTextBox.IsReadOnly = isReadOnly;
+            UserNameTextBox.IsEnabled = !isReadOnly;
+            FirstNameTextBox.IsEnabled = !isReadOnly;
+            SecondNameTextBox.IsEnabled = !isReadOnly;
+            EmailTextBox.IsEnabled = !isReadOnly;
             SaveButton.Visibility = isReadOnly ? Visibility.Hidden : Visibility.Visible;
         }
 

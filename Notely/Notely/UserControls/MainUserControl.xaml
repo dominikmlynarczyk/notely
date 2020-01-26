@@ -35,6 +35,7 @@
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width=".02*"></ColumnDefinition>
                         <ColumnDefinition Width="Auto"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -42,16 +43,16 @@
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
                     <Button Grid.Row="0" Grid.Column="2" Name="OpenButton" HorizontalAlignment="Center" Content="{x:Static p:Resources.Open}" Height="Auto" Width="Auto" Click="OpenButton_Click"/>
-                    <Button Grid.Row="0" Grid.Column="3" Name="NewNoteButton" HorizontalAlignment="Center" Content="{x:Static p:Resources.NewNote}" Height="Auto" Width="Auto" Click="NewNoteButton_OnClick"/>
+                    <Button Grid.Row="0" Grid.Column="4" Name="NewNoteButton" HorizontalAlignment="Center" Background="#77DD77" BorderThickness="0" Content="{x:Static p:Resources.NewNote}" Height="Auto" Width="Auto" Click="NewNoteButton_OnClick"/>
                     <Label FontSize="18" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Content="{x:Static p:Resources.SearchByName}"></Label>
-                    <TextBox FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="1" TextChanged="NameTextBox_OnTextChanged" Name="NameTextBox"  Grid.Row="0"></TextBox>
-                    <DataGrid CanUserAddRows="False" Grid.Row="1" Grid.ColumnSpan="4" ItemsSource="{Binding}" AlternatingRowBackground="LightBlue" AlternationCount="2" Name="NotesDataGrid" AutoGenerateColumns="false">
+                    <TextBox FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="1" TextChanged="NameTextBox_OnTextChanged" Name="NameTextBox"  Grid.Row="0" Margin="10,0,50,0"></TextBox>
+                    <DataGrid CanUserAddRows="False" Grid.Row="1" Grid.ColumnSpan="5" ItemsSource="{Binding}" AlternatingRowBackground="LightBlue" AlternationCount="2" Name="NotesDataGrid" AutoGenerateColumns="false">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="{x:Static p:Resources.Name}" Binding="{Binding Name}"></DataGridTextColumn>
                             <DataGridTextColumn Header="{x:Static p:Resources.CreatedDate}" Binding="{Binding CreatedDate}"></DataGridTextColumn>
                             <DataGridTextColumn Header="{x:Static p:Resources.ModifiedDate}" Binding="{Binding ModifiedDate}"></DataGridTextColumn>
                             <DataGridTextColumn Header="{x:Static p:Resources.FilePath}" Binding="{Binding ContentPath}"></DataGridTextColumn>
-                            <DataGridTemplateColumn Header="Action">
+                            <DataGridTemplateColumn Header="{x:Static p:Resources.Action}">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Grid>
@@ -103,7 +104,7 @@
                             </Style>
                         </editor:MarkdownEditor.Resources>
                     </editor:MarkdownEditor>
-                    <Button Name="SaveButton"  Grid.Row="1" Grid.Column="2" Width="Auto" Content="{x:Static p:Resources.Save}" Click="SaveButton_OnClick"></Button>
+                    <Button Name="SaveButton"  Grid.Row="1" Grid.Column="2" Width="Auto" Content="{x:Static p:Resources.Save}" Click="SaveButton_OnClick" Background="#77DD77" BorderThickness="0"></Button>
                     <Label FontSize="18" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Content="{x:Static p:Resources.Name}"></Label>
                     <TextBox FontSize="18" VerticalAlignment="Center" HorizontalAlignment="Stretch" Grid.Column="1" TextChanged="NameTextBox_OnTextChanged" Name="EditNameTextBox"  Grid.Row="1"></TextBox>
                 </Grid>

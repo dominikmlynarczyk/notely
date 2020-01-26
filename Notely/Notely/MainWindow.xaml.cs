@@ -27,6 +27,7 @@ namespace Notely
             _session = session;
             _queryDispatcher = queryDispatcher;
             InitializeComponent();
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             LoggingControl.OnSigningInEvent += OnSigningInEventHandler;
             LoggingControl.OnSigningUpEvent += OnSigningUpEventHandler;
             MainUserControl.OnSaveNote += SaveNote;
@@ -65,12 +66,8 @@ namespace Notely
 
         private void SaveNote(CreateNoteCommand command)
         {
-            if (!_noteId.HasValue)
-            {
-
-                _commandDispatcher.Dispatch(command);
+            _commandDispatcher.Dispatch(command);
                 _noteId = command.Id;
-            }
         }
 
         private void OnIsAuthenticatedChangedEventHandler(bool isAuthenticated)
@@ -93,6 +90,7 @@ namespace Notely
                 SignOutButton.Visibility = Visibility.Hidden;
                 UserInfoButton.Visibility = Visibility.Hidden;
                 NameLabel.Visibility = Visibility.Hidden;
+                NameLabel.Content = "Hello, {0}";
             }
         }
 
@@ -128,6 +126,11 @@ namespace Notely
         {
             var window = new UserWindow(_commandDispatcher, _queryDispatcher, _session);
             window.Show();
+        }
+
+        private void LoggingControl_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
