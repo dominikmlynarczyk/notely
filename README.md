@@ -30,5 +30,5 @@ Głównym celem aplikacji jest przygotowanie pełnoprawnego edytora formatu Mark
 
 Wraz z rozwojem projektu pewne detale koncepcji projektu się zmieniały, a także ostatecznie do projektu zostały dodane kolejne funkcjonalności aplikacji:
 
-1. Możliwość rejestracji nowych użytkowników i obsługi systemu logowania przy wykorzystaniu platformy *Entity Framework*
+1. Możliwość rejestracji nowych użytkowników i obsługi systemu logowania przy wykorzystaniu *Entity Framework*
 2. Panel użytkownika umożliwiający modyfikację jego danych, a także zmianę hasła i całkowite usunięcie konta z bazy
