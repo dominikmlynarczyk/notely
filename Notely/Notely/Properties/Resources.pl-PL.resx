@@ -121,7 +121,7 @@
     <value>Akcja</value>
   </data>
   <data name="BaseErrorMessage" xml:space="preserve">
-    <value>Coś poszło nie tak</value>
+    <value>Coś poszło nie tak. Sprawdź konfigurację i upewnij się, czy uruchamiasz z uprawnieniami administratora.</value>
   </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Zmień hasło</value>

@@ -121,7 +121,7 @@
     <value>Action</value>
   </data>
   <data name="BaseErrorMessage" xml:space="preserve">
-    <value>Something went wrong</value>
+    <value>Something went wrong. Check configuration and ensure if application is running with administrator permissions.</value>
   </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Change password</value>

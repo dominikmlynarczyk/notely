@@ -70,7 +70,7 @@ namespace Notely.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Something went wrong.
+        ///   Looks up a localized string similar to Something went wrong. Check configuration and ensure if application is running with administrator permissions..
         /// </summary>
         public static string BaseErrorMessage {
             get {
