@@ -2,33 +2,33 @@
   <img src="https://i.postimg.cc/W4TWn8TS/notely-gh.png">
 </p>
 
-# Projekt semestralny - aplikacja Notely
+# Notely
 
-Aplikacja Notely jest semestralnym projektem zaliczeniowym przedmiotu "Programowanie obiektowe C#" w Wyższej Szkole Ekonomii i Informatyki w Krakowie.
+The Notely application is a semester final project of the subject "Object-oriented programming in C#" at the College of Economics and Computer Science in Krakow.
 
-## Cel projektu
+## Purpose of the project
 
-Głównym celem aplikacji jest przygotowanie pełnoprawnego edytora formatu Markdown z jednoczesnym generowaniem widoku dla tego formatu. Aplikacja ma być prostym odpowiednikiem aplikacji typu OneNote / Evernote, początkowo wykorzystująca zasoby lokalne z możliwością rozbudowy do przechowywania notatek w chmurze (np. Azure).
+The main purpose of the application is to prepare a fully-fledged Markdown editor with the ability to generate a view for that format. The application goal is to give the end-user an equivalent of OneNote / Evernote applications, initially using local resources with the possibility of extension to store notes in the cloud (e.g. Azure).
 
-## Zespół tworzący projekt
+## Project development team
 
 1. [Dominik Młynarczyk](https://github.com/dominikmlynarczyk)
 2. [Jakub Antosz](https://github.com/qhorinn?fbclid=IwAR1e2ONikpnInt_6yjzDDX4z_d2lDQ6AX-i6lHwsSfASIS5zubtnpiO1slg)
 3. [Jakub Święch](https://github.com/CaptainOfPain) 
 
-## Wstępne założenia projektu
+## Initial project assumptions
 
-<u>**Wstępne**</u> założenia co do funkcjonalności aplikacji:
+<u>**Preliminary**</u> assumptions as to the functionality of the application:
 
-1. Interfejs będzie zbudowany z dwóch kolumn, gdzie lewa kolumna będzie reprezentowała dynamiczny podgląd wygenerowanej notatki, a druga kolumna będzie częścią edytorską.
-2. Podstawowa obsługa edytora tekstu - zapisywanie notatki, wczytywanie notatek do edytora (w formacie `.md`), usuwanie notatek, nadawnie tytułu notatce oraz możliwość jej zmiany
-3. Pełna obsługa podstawowych znaczników języka _Markdown_ - akapity, nagłówki, cytaty, formatowanie tekstu (emfaza, podkreślenie, pogrubienie), listy, linki, grafiki, bloki kodu itp.
-4. Zaimplementowany prosty system wyszukiwania notatek
-5. Podstawowe właściwości informacyjne notatki - data utworzenia i ostatniej edycji notatki
+1. The interface will be composed of two columns, where the left column will represent a dynamic preview of the generated note, and the second column will be the editor part.
+2. Basic use of a text editor - saving a note, loading notes into the editor (in .md format), deleting notes, giving a note title and the ability to change it
+3. Full support for basic Markdown tags - paragraphs, headings, quotes, text formatting (emphasis, underline, bold), lists, links, graphics, code blocks, etc.
+4. Simple note search system
+5. Basic information properties of the note e.g. date of creation and last edition of the note
 
-## Dodatkowe zaimplementowane funkcje
+## Additional functionality
 
-Wraz z rozwojem projektu pewne detale koncepcji projektu się zmieniały, a także ostatecznie do projektu zostały dodane kolejne funkcjonalności aplikacji:
+With the development of the project, some details of the project concept changed, and finally, new application functionalities were added to the project:
 
-1. Możliwość rejestracji nowych użytkowników i obsługi systemu logowania przy wykorzystaniu *Entity Framework*
-2. Panel użytkownika umożliwiający modyfikację jego danych, a także zmianę hasła i całkowite usunięcie konta z bazy
+1. The ability to register new users and operate the login system using the *Entity Framework*
+2. User panel dashboard enabling modification of his data, as well as password change and complete removal of the account from the database
